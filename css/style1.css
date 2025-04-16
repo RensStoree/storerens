@@ -1,0 +1,86 @@
+/* ==========================================================================
+   Daftar Semua Game Page Styles (style1.css)
+   ========================================================================== */
+
+body {
+  background-color: #121212; /* Contoh background gelap lain */
+  color: #e0e0e0;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding-top: 60px;
+  padding-bottom: 30px;
+}
+
+h1 {
+  color: #bb86fc; /* Contoh warna judul yang berbeda */
+  margin-top: 30px;
+  margin-bottom: 25px;
+  font-size: 2.2em;
+  font-weight: bold;
+}
+
+.button-group {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 15px;
+  display: grid; /* Menggunakan grid layout untuk contoh perbedaan */
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Membuat tata letak grid responsif */
+  gap: 10px;
+}
+
+.cool-button {
+  position: relative;
+  overflow: hidden;
+  padding: 10px 15px;
+  background-color: #303030;
+  border: 1px solid #bb86fc;
+  border-radius: 5px;
+  color: #e0e0e0;
+  font-size: 0.9em;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cool-button:hover {
+  background-color: #bb86fc;
+  color: #121212;
+}
+
+.cool-button i {
+  margin-right: 5px;
+}
+
+p a {
+  color: #bb86fc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+p a:hover {
+  color: #03dac6;
+}
+
+.logo-container {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 2001;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #e0e0e0;
+}
+
+.logo {
+  width: 40px;
+  height: auto;
+  margin-right: 8px;
+}
+
+.store-name {
+  font-size: 1.3em;
+  font-weight: bold;
+}
