@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Top Up Game - Rens Store</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 40px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      border-radius: 12px;
+      padding: 20px 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      animation: fadeInUp 1s ease;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+    .form-group input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .section-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #444;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    li a.price-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px dashed #ddd;
+      color: inherit;
+      text-decoration: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    li:nth-child(even) a.price-link {
+      background: #f9f9f9;
+    }
+    li a.price-link:hover {
+      background-color: #e0f7fa;
+    }
+    span.symbol {
+      font-weight: bold;
+      color: #f39c12;
+      margin-right: 5px;
+    }
+    span.buy-text {
+      color: #00bfff;
+      font-weight: bold;
+    }
+    li a.price-link:hover span.buy-text {
+      color: #008ad6;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 id="gameTitle">Pilih Game untuk Top Up</h2>
+
+  <div class="form-group">
+    <label for="gameId">ID Game:</label>
+    <input type="text" id="gameId" name="gameId" placeholder="Masukkan ID Game Anda">
+  </div>
+
+  <div id="priceList">
+    </div>
+
+</div>
+
+  <footer>
+    &copy; 2025 Rens Store. All rights reserved.
+  </footer>
+
+  <script>
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    var game = getParameterByName('game');
+    var gameTitleElement = document.getElementById('gameTitle');
+    var priceListElement = document.getElementById('priceList');
+
+    var prices = {
+      freefire: {
+        title: 'Top Up Free Fire',
+        items: [
+          { name: '5 Diamonds', price: 921, symbol: '💎' },
+          { name: '20 Diamonds', price: 3676, symbol: '💎' },
+          { name: '50 Diamonds', price: 7352, symbol: '💎' },
+          { name: '100 Diamonds', price: 14703, symbol: '💎' },
+          { name: 'Membership Mingguan', price: 29531, symbol: '' },
+          { name: 'Membership Bulanan', price: 88592, symbol: '' },
+        ],
+      },
+      codm: {
+        title: 'Top Up Call of Duty Mobile',
+        items: [
+          { name: '80 CP', price: 12000, symbol: 'CP' },
+          { name: '420 CP', price: 50000, symbol: 'CP' },
+          { name: '800 CP', price: 95000, symbol: 'CP' },
+          { name: 'Battle Pass', price: 80000, symbol: '' },
+        ],
+      },
+      supersus: {
+        title: 'Top Up Super Sus',
+        items: [
+          { name: '60 Gold', price: 10000, symbol: 'Gold' },
+          { name: '300 Gold', price: 45000, symbol: 'Gold' },
+          { name: '680 Gold', price: 90000, symbol: 'Gold' },
+        ],
+      },
+      mlbb: {
+        title: 'Top Up Mobile Legends: Bang Bang',
+        items: [
+          { name: '5 Diamonds', price: 1500, symbol: '💎' },
+          { name: '25 Diamonds', price: 7000, symbol: '💎' },
+          { name: '50 Diamonds', price: 13000, symbol: '💎' },
+          { name: '100 Diamonds', price: 25000, symbol: '💎' },
+        ],
+      },
+      genshin: {
+        title: 'Top Up Genshin Impact',
+        items: [
+          { name: '60 Genesis Crystals', price: 15000, symbol: 'Genesis Crystal' },
+          { name: '300 + 30 Genesis Crystals', price: 75000, symbol: 'Genesis Crystal' },
+          { name: '980 + 110 Genesis Crystals', price: 199000, symbol: 'Genesis Crystal' },
+        ],
+      },
+      valorant: {
+        title: 'Top Up Valorant Points',
+        items: [
+          { name: '125 VP', price: 15000, symbol: 'VP' },
+          { name: '635 VP', price: 75000, symbol: 'VP' },
+          { name: '1250 VP', price: 149000, symbol: 'VP' },
+        ],
+      },
+      supercell: {
+        title: 'Top Up Supercell Games',
+        items: [
+          { name: '80 Gems', price: 12000, symbol: 'Gems' },
+          { name: '500 Gems', price: 70000, symbol: 'Gems' },
+          { name: '1200 Gems', price: 150000, symbol: 'Gems' },
+        ],
+      },
+      // Tambahkan daftar harga untuk game lainnya di sini
+    };
+
+    if (prices[game]) {
+      gameTitleElement.textContent = prices[game].title;
+      var html = '<div class="section"><div class="section-title">Pilihan Top Up</div><ul>';
+      prices[game].items.forEach(function(item) {
+        html += `<li><a href="#beli-sekarang?game=${game}&item=${encodeURIComponent(item.name)}" class="price-link"><span>${item.name}</span><span class="symbol">${item.symbol}</span><span>Rp ${item.price.toLocaleString()}</span><span class="buy-text">Beli Sekarang</span></a></li>`;
+      });
+      html += '</ul></div>';
+      priceListElement.innerHTML = html;
+    } else {
+      gameTitleElement.textContent = 'Game Tidak Ditemukan';
+      priceListElement.innerHTML = '<p>Maaf, daftar harga untuk game ini belum tersedia.</p>';
+    }
+  </script>
+</body>
+</html>
