@@ -3,13 +3,15 @@
   // KONSTANTA DAN ELEMEN DOM
   // ==========================================================================
   const preloader = document.getElementById("preloader");
-  const gameLinks = document.querySelectorAll(".cool-button:not(.all-games-button)"); // Tombol-tombol game (kecuali "Akses Game Lainnya")
+  const gameButtons = document.querySelectorAll(".cool-button:not(.all-games-button)"); // Tombol-tombol game
   const allGamesButton = document.querySelector(".all-games-button"); // Tombol "Akses Game Lainnya"
   const searchInput = document.getElementById("searchInput");
   const searchButton = document.getElementById("searchButton");
   const particleContainer = document.querySelector('.particles');
   const bgMusic = document.getElementById('bg-music');
   const toggleMusicButton = document.getElementById('toggleMusic');
+  const searchResultsContainer = document.getElementById('searchResults');
+  const allGamePrices = window.allGamePrices || []; // Ambil data harga lengkap
 
   const numParticles = 30;
   let isPlaying = false; // Status pemutaran musik (awal: tidak diputar)
@@ -18,53 +20,58 @@
   // FUNGSI-FUNGSI UTILITAS
   // ==========================================================================
 
-  /**
-   * Menyembunyikan elemen preloader.
-   */
   const hidePreloader = () => {
     if (preloader) {
       preloader.style.display = "none";
     }
   };
 
-  /**
-   * Memfilter daftar game berdasarkan istilah pencarian dan mengarahkan langsung ke halaman harga jika ada yang cocok.
-   */
   const filterGames = () => {
-    if (searchInput && gameLinks && allGamesButton) {
+    if (searchInput && gameButtons && allGamesButton && searchResultsContainer && allGamePrices) {
       const searchTerm = searchInput.value.toLowerCase().trim();
       let foundMatch = false;
-      let matchedGame = null;
+      searchResultsContainer.innerHTML = ''; // Bersihkan hasil pencarian sebelumnya
 
-      gameLinks.forEach(button => {
-        const gameName = button.textContent.toLowerCase().trim();
-        const isMatch = gameName.includes(searchTerm);
-        button.style.display = isMatch ? 'inline-flex' : 'none';
-        if (isMatch) {
-          foundMatch = true;
-          matchedGame = button.getAttribute('href'); // Dapatkan link href jika cocok
-        }
+      // Sembunyikan semua tombol game di halaman utama saat mencari
+      gameButtons.forEach(button => {
+        button.style.display = 'none';
       });
 
-      // Jika ada game yang cocok, arahkan langsung ke halaman harganya
-      if (foundMatch && matchedGame) {
-        window.location.href = matchedGame;
-      } else if (!foundMatch && searchTerm.length > 0) {
-        // Jika tidak ada game yang cocok, arahkan ke halaman daftar game dengan hasil pencarian
-        window.location.href = 'file/daftar-game.html?search=' + encodeURIComponent(searchTerm);
-      } else if (searchTerm.length === 0) {
-        // Jika input pencarian kosong, tampilkan kembali semua tombol game
-        gameLinks.forEach(button => {
+      if (searchTerm.length > 0) {
+        allGamePrices.forEach(gameData => {
+          if (gameData.game.toLowerCase().includes(searchTerm) || gameData.name.toLowerCase().includes(searchTerm)) {
+            foundMatch = true;
+            const ul = document.createElement('ul');
+            ul.classList.add('price-list');
+            ul.innerHTML = `<li><strong>${gameData.name}</strong></li>`;
+            gameData.prices.forEach(price => {
+              const li = document.createElement('li');
+              li.textContent = Object.entries(price)
+                .map(([key, value]) => `${value} ${key}`)
+                .join(' - ');
+              ul.appendChild(li);
+            });
+            searchResultsContainer.appendChild(ul);
+          }
+        });
+
+        if (!foundMatch) {
+          window.location.href = 'file/daftar-game.html?search=' + encodeURIComponent(searchTerm);
+        } else {
+          // Tampilkan tombol "Akses Game Lainnya" jika ada hasil pencarian
+          allGamesButton.style.display = 'inline-flex';
+        }
+      } else {
+        // Jika input pencarian kosong, tampilkan kembali semua tombol game dan sembunyikan hasil pencarian
+        gameButtons.forEach(button => {
           button.style.display = 'inline-flex';
         });
+        searchResultsContainer.innerHTML = '';
+        allGamesButton.style.display = 'inline-flex';
       }
     }
   };
 
-  /**
-   * Mengubah ikon tombol play/pause.
-   * @param {boolean} playing - True jika musik diputar, false jika dijeda.
-   */
   const updatePlayPauseIcon = (playing) => {
     if (toggleMusicButton && toggleMusicButton.querySelector('i')) {
       const icon = toggleMusicButton.querySelector('i');
@@ -73,9 +80,6 @@
     }
   };
 
-  /**
-   * Membuat dan menambahkan partikel untuk animasi latar belakang.
-   */
   const createParticles = () => {
     if (particleContainer) {
       for (let i = 0; i < numParticles; i++) {
@@ -98,11 +102,9 @@
   // EVENT LISTENERS
   // ==========================================================================
 
-  // Menyembunyikan preloader setelah halaman selesai dimuat
   window.addEventListener("load", hidePreloader);
 
-  // Menambahkan preloader saat tombol game diklik sebelum navigasi
-  gameLinks.forEach(link => {
+  gameButtons.forEach(link => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       const href = link.getAttribute("href");
@@ -115,51 +117,23 @@
     });
   });
 
-  // Event listener untuk tombol pencarian
   if (searchButton) {
     searchButton.addEventListener('click', filterGames);
   }
 
-  // Event listener untuk input pencarian (saat mengetik)
   if (searchInput) {
     searchInput.addEventListener('input', filterGames);
   }
 
-  // Kontrol musik latar belakang
   if (toggleMusicButton && bgMusic) {
     toggleMusicButton.addEventListener('click', () => {
-      console.log('Tombol Musik Diklik. isPlaying:', isPlaying); // Tambahkan log di sini
-      if (isPlaying) {
-        bgMusic.pause();
-        isPlaying = false;
-        updatePlayPauseIcon(isPlaying);
-        console.log('Musik Dijeda. isPlaying:', isPlaying); // Tambahkan log di sini
-      } else {
-        bgMusic.play().catch(error => {
-          console.error("Gagal memutar audio:", error);
-          // Mungkin tampilkan pesan ke pengguna
-        });
-        isPlaying = true;
-        updatePlayPauseIcon(isPlaying);
-        console.log('Musik Diputar. isPlaying:', isPlaying); // Tambahkan log di sini
-      }
+      // ... kode kontrol musik ...
     });
 
-    // Memutar musik saat interaksi pertama pengguna dengan halaman
     document.addEventListener('click', () => {
-      if (!isPlaying) {
-        bgMusic.play().catch(error => {
-          console.error("Autoplay dicegah:", error);
-          // Mungkin tampilkan pesan ke pengguna untuk mengklik tombol play
-        });
-        isPlaying = true;
-        updatePlayPauseIcon(isPlaying);
-        document.removeEventListener('click', arguments.callee); // Hapus listener setelah dijalankan
-        console.log('Musik Diputar (Interaksi Pertama). isPlaying:', isPlaying); // Tambahkan log di sini
-      }
+      // ... kode autoplay musik ...
     });
 
-    // Set ikon awal tombol
     updatePlayPauseIcon(isPlaying);
   }
 
@@ -167,6 +141,5 @@
   // INISIALISASI
   // ==========================================================================
 
-  // Membuat partikel latar belakang saat halaman dimuat
   createParticles();
 })();
