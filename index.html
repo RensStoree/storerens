@@ -28,17 +28,34 @@
     <button id="searchButton"><i class="fas fa-search"></i></button>
   </div>
 
-<div class="button-group">
-  <a href="harga.html?game=freefire#freefire" class="cool-button"><i class="fas fa-fire mr-2"></i> Free Fire</a>
-  <a href="harga.html?game=codm#codm" class="cool-button"><i class="fas fa-gamepad mr-2"></i> Call of Duty</a>
-  <a href="harga.html?game=supersus#supersus" class="cool-button"><i class="fas fa-user-astronaut mr-2"></i> Super Sus</a>
-  <a href="harga.html?game=mlbb#mlbb" class="cool-button"><i class="fas fa-mobile-alt mr-2"></i> Mobile Legends</a>
- </div>
+  <div class="category-container">
+    <h2>Kategori Game</h2>
+    <div class="category-buttons">
+      <button class="cool-button category-button active" data-category="all"><i class="fas fa-th mr-2"></i> Semua</button>
+      <button class="cool-button category-button" data-category="mobile"><i class="fas fa-mobile-alt mr-2"></i> Mobile</button>
+      <button class="cool-button category-button" data-category="action"><i class="fas fa-swords mr-2"></i> Action</button>
+      <button class="cool-button category-button" data-category="strategy"><i class="fas fa-brain mr-2"></i> Strategy</button>
+      </div>
+  </div>
 
-<div class="button-group">
-  <a href="file/daftar-game.html" class="cool-button all-games-button"><i class="fas fa-list mr-2"></i> Akses Game Lainnya</a>
-</div>
+  <div class="button-group game-list">
+    <a href="harga.html?game=freefire#freefire" class="cool-button favorite-button" data-game-name="Free Fire" data-category="mobile action"><i class="fas fa-heart mr-2"></i> <i class="fas fa-fire mr-2"></i> Free Fire</a>
+    <a href="harga.html?game=codm#codm" class="cool-button" data-category="mobile action"><i class="fas fa-gamepad mr-2"></i> Call of Duty</a>
+    <a href="harga.html?game=supersus#supersus" class="cool-button" data-category="mobile strategy"><i class="fas fa-user-astronaut mr-2"></i> Super Sus</a>
+    <a href="harga.html?game=mlbb#mlbb" class="cool-button" data-category="mobile strategy action"><i class="fas fa-mobile-alt mr-2"></i> Mobile Legends</a>
+   </div>
 
+  <div class="button-group">
+    <a href="file/daftar-game.html" class="cool-button all-games-button"><i class="fas fa-list mr-2"></i> Akses Game Lainnya</a>
+  </div>
+  <div class="button-group">
+    <a href="#" id="favoriteGamesButton" class="cool-button"><i class="fas fa-heart mr-2"></i> Game Favorit (<span id="favoriteCount">0</span>)</a>
+  </div>
+  <div id="favoriteGamesList" style="display:none; margin-top: 20px;">
+    <h2>Game Favorit Saya</h2>
+    <div id="favoriteGamesContainer">
+      </div>
+  </div>
 
   <section class="how-to-topup">
     <h2>Cara Top Up</h2>
@@ -78,6 +95,8 @@
   Browser tidak mendukung audio.
 </audio>
 
+<div id="notification-container" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 0, 0.7); color: white; padding: 10px 20px; border-radius: 5px; z-index: 1000; display: none;">
+  </div>
 
   <script src="js/script.js"></script>
 </body>
