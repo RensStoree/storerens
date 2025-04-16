@@ -28,12 +28,13 @@
   };
 
   /**
-   * Memfilter daftar game berdasarkan istilah pencarian dan mengarahkan ke daftar game jika tidak ada yang cocok.
+   * Memfilter daftar game berdasarkan istilah pencarian dan mengarahkan langsung ke halaman harga jika ada yang cocok.
    */
   const filterGames = () => {
     if (searchInput && gameLinks && allGamesButton) {
       const searchTerm = searchInput.value.toLowerCase().trim();
       let foundMatch = false;
+      let matchedGame = null;
 
       gameLinks.forEach(button => {
         const gameName = button.textContent.toLowerCase().trim();
@@ -41,11 +42,15 @@
         button.style.display = isMatch ? 'inline-flex' : 'none';
         if (isMatch) {
           foundMatch = true;
+          matchedGame = button.getAttribute('href'); // Dapatkan link href jika cocok
         }
       });
 
-      // Jika tidak ada game yang cocok, arahkan ke halaman daftar game
-      if (!foundMatch && searchTerm.length > 0) {
+      // Jika ada game yang cocok, arahkan langsung ke halaman harganya
+      if (foundMatch && matchedGame) {
+        window.location.href = matchedGame;
+      } else if (!foundMatch && searchTerm.length > 0) {
+        // Jika tidak ada game yang cocok, arahkan ke halaman daftar game dengan hasil pencarian
         window.location.href = 'file/daftar-game.html?search=' + encodeURIComponent(searchTerm);
       } else if (searchTerm.length === 0) {
         // Jika input pencarian kosong, tampilkan kembali semua tombol game
