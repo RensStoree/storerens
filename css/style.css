@@ -41,6 +41,13 @@ body {
   background-color: #333;
 }
 
+
+mark {
+  background-color: yellow; /* Warna latar belakang sorotan */
+  color: black; /* Warna teks sorotan */
+  font-weight: bold; /* Membuat teks sorotan menjadi tebal */
+}
+
 /* ==========================================================================
    Title
    ========================================================================== */
