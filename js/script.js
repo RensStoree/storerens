@@ -1,178 +1,162 @@
-(() => {
-  // ==========================================================================
-  // KONSTANTA DAN ELEMEN DOM
-  // ==========================================================================
-  const preloader = document.getElementById("preloader");
-  const gameButtons = document.querySelectorAll(".cool-button:not(.all-games-button)");
-  const searchInput = document.getElementById("searchInput");
-  const searchResultsContainer = document.getElementById('searchResultsContainer');
-  const toggleMusicButton = document.getElementById('toggleMusic');
-  const bgMusic = document.getElementById('bg-music');
-  const initialGameButtons = Array.from(document.querySelectorAll('.button-group:first-child .cool-button')).map(button => ({
-    name: button.textContent.trim(),
-    url: button.getAttribute('href')
-  }));
-
-  let isPlaying = false;
-  let searchTimeout;
-  let allGamesData = [...initialGameButtons]; // Inisialisasi dengan tombol game di halaman utama
-
-  // ==========================================================================
-  // FUNGSI-FUNGSI UTILITAS
-  // ==========================================================================
-
-  const hidePreloader = () => {
-    if (preloader) {
-      preloader.style.display = "none";
-    }
-  };
-
-  const updatePlayPauseIcon = (playing) => {
-    if (toggleMusicButton && toggleMusicButton.querySelector('i')) {
-      const icon = toggleMusicButton.querySelector('i');
-      icon.classList.remove(playing ? 'fa-play' : 'fa-pause');
-      icon.classList.add(playing ? 'fa-pause' : 'fa-play');
-    }
-  };
-
-  const displaySearchResults = (results, searchTerm) => {
-    if (!searchResultsContainer) return;
-
-    searchResultsContainer.innerHTML = '';
-    if (results.length > 0) {
-      const ul = document.createElement('ul');
-      const regex = new RegExp(searchTerm, 'gi');
-      results.forEach(game => {
-        const li = document.createElement('li');
-        const link = document.createElement('a');
-        const highlightedName = game.name.replace(regex, '<mark>$&</mark>');
-        link.href = game.url;
-        link.innerHTML = highlightedName;
-        li.appendChild(link);
-        ul.appendChild(li);
-      });
-      searchResultsContainer.appendChild(ul);
-      searchResultsContainer.style.display = 'block';
-    } else {
-      searchResultsContainer.style.display = 'none';
-    }
-  };
-
-  const filterGames = (searchTerm) => {
-    if (!searchTerm.trim()) {
-      if (searchResultsContainer) {
-        searchResultsContainer.innerHTML = '';
-        searchResultsContainer.style.display = 'none';
-      }
-      return [];
-    }
-
-    const results = allGamesData.filter(gameData =>
-      gameData.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    return results;
-  };
-
-  const fetchOtherGames = async () => {
-    try {
-      const response = await fetch('file/daftar-game.html');
-      if (!response.ok) {
-        console.error('Gagal mengambil daftar game lainnya:', response.status);
-        return;
-      }
-      const html = await response.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      const gameList = doc.querySelectorAll('.button-group a.cool-button');
-
-      const otherGames = Array.from(gameList).map(link => ({
-        name: link.textContent.trim(),
-        url: link.getAttribute('href')
-      }));
-
-      // Gabungkan dengan data game dari halaman utama
-      allGamesData = [...initialGameButtons, ...otherGames];
-    } catch (error) {
-      console.error('Terjadi kesalahan saat mengambil daftar game lainnya:', error);
-    }
-  };
-
-  // ==========================================================================
-  // EVENT LISTENERS
-  // ==========================================================================
-
-  window.addEventListener("load", async () => {
-    hidePreloader();
-    await fetchOtherGames(); // Ambil data game lainnya saat halaman dimuat
-
-    // Menampilkan semua hasil game saat halaman dimuat (termasuk dari daftar game)
-    if (searchInput) {
-      displaySearchResults(allGamesData, '');
-    }
-  });
-
-  gameButtons.forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const href = link.getAttribute("href");
-      if (preloader) {
-        preloader.style.display = "flex";
-      }
-      setTimeout(() => {
-        window.location.href = href;
-      }, 100);
-    });
-  });
-
-  if (searchInput && searchResultsContainer) {
-    searchInput.addEventListener('input', function() {
-      clearTimeout(searchTimeout);
-      searchTimeout = setTimeout(() => {
-        const searchTerm = searchInput.value;
-        const results = filterGames(searchTerm);
-        displaySearchResults(results, searchTerm);
-      }, 200);
-    });
-
-    searchInput.addEventListener('focus', function() {
-      const searchTerm = searchInput.value;
-      if (searchTerm.trim()) {
-        const results = filterGames(searchTerm);
-        displaySearchResults(results, searchTerm);
-      }
-    });
-
-    searchInput.addEventListener('blur', function() {
-      setTimeout(() => {
-        searchResultsContainer.style.display = 'none';
-      }, 200);
+document.addEventListener('DOMContentLoaded', () => {
+  // --- Preloader ---
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    window.addEventListener('load', () => {
+      preloader.style.display = 'none';
     });
   }
 
-  if (toggleMusicButton && bgMusic) {
+  // --- Pencarian Game ---
+  const searchInput = document.getElementById('searchInput');
+  const searchButton = document.getElementById('searchButton');
+  const searchIcon = document.getElementById('searchIcon');
+  const gameListContainer = document.querySelector('.game-list');
+  const gameButtons = gameListContainer ? gameListContainer.querySelectorAll('.cool-button') : [];
+
+  if (searchInput && searchButton && searchIcon && gameButtons.length > 0) {
+    searchButton.addEventListener('click', () => {
+      filterGames(searchInput.value.toLowerCase().trim());
+    });
+
+    searchInput.addEventListener('input', () => {
+      filterGames(searchInput.value.toLowerCase().trim());
+    });
+
+    const filterGames = (searchTerm) => {
+      let found = false;
+      gameButtons.forEach(button => {
+        const gameName = button.textContent.toLowerCase().trim();
+        if (gameName.includes(searchTerm)) {
+          button.style.display = 'inline-block';
+          found = true;
+        } else {
+          button.style.display = 'none';
+        }
+      });
+      searchIcon.style.display = searchTerm !== '' && found ? 'inline' : 'none';
+    };
+  }
+
+  // --- Filter Kategori ---
+  const categoryButtons = document.querySelectorAll('.category-button');
+  if (categoryButtons.length > 0 && gameListContainer && gameButtons.length > 0) {
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const category = this.dataset.category;
+
+        categoryButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+
+        gameButtons.forEach(gameButton => {
+          const gameCategories = gameButton.dataset.category ? gameButton.dataset.category.split(' ') : [];
+          if (category === 'all' || gameCategories.includes(category)) {
+            gameButton.style.display = 'inline-block';
+          } else {
+            gameButton.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Set kategori 'Semua' aktif secara default
+    const allCategoryButton = document.querySelector('.category-button[data-category="all"]');
+    if (allCategoryButton) {
+      allCategoryButton.classList.add('active');
+    }
+  }
+
+  // --- Favorit Game ---
+  const favoriteButtons = document.querySelectorAll('.favorite-button');
+  const favoriteGamesButton = document.getElementById('favoriteGamesButton');
+  const favoriteGamesList = document.getElementById('favoriteGamesList');
+  const favoriteGamesContainer = document.getElementById('favoriteGamesContainer');
+  const favoriteCountSpan = document.getElementById('favoriteCount');
+  let favoriteGames = JSON.parse(localStorage.getItem('favoriteGames')) || [];
+
+  const updateFavoriteCount = () => {
+    favoriteCountSpan.textContent = favoriteGames.length;
+  };
+
+  const renderFavoriteGames = () => {
+    favoriteGamesContainer.innerHTML = '';
+    if (favoriteGames.length > 0) {
+      favoriteGames.forEach(gameName => {
+        const gameLink = document.createElement('a');
+        gameLink.href = `harga.html?game=${gameName.toLowerCase().replace(/ /g, '')}#${gameName.toLowerCase().replace(/ /g, '')}`;
+        gameLink.classList.add('cool-button', 'favorite-game-item');
+        gameLink.textContent = gameName;
+        favoriteGamesContainer.appendChild(gameLink);
+      });
+      favoriteGamesList.style.display = 'block';
+    } else {
+      favoriteGamesList.style.display = 'none';
+    }
+    updateFavoriteCount();
+  };
+
+  const toggleFavorite = (gameName, button) => {
+    const index = favoriteGames.indexOf(gameName);
+    if (index > -1) {
+      favoriteGames.splice(index, 1);
+      button.classList.remove('favorited');
+      showNotification(`${gameName} dihapus dari favorit.`);
+    } else {
+      favoriteGames.push(gameName);
+      button.classList.add('favorited');
+      showNotification(`${gameName} ditambahkan ke favorit!`);
+    }
+    localStorage.setItem('favoriteGames', JSON.stringify(favoriteGames));
+    renderFavoriteGames();
+  };
+
+  if (favoriteButtons.length > 0 && favoriteGamesButton && favoriteGamesList && favoriteGamesContainer && favoriteCountSpan) {
+    favoriteButtons.forEach(button => {
+      const gameName = button.dataset.gameName;
+      if (favoriteGames.includes(gameName)) {
+        button.classList.add('favorited');
+      }
+      button.addEventListener('click', function(event) {
+        event.preventDefault();
+        toggleFavorite(gameName, this);
+      });
+    });
+
+    favoriteGamesButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      favoriteGamesList.style.display = favoriteGamesList.style.display === 'none' ? 'block' : 'none';
+    });
+
+    renderFavoriteGames(); // Initial render
+  }
+
+  // --- Notifikasi ---
+  const notificationContainer = document.getElementById('notification-container');
+  const showNotification = (message) => {
+    if (notificationContainer) {
+      notificationContainer.textContent = message;
+      notificationContainer.style.display = 'block';
+      setTimeout(() => {
+        notificationContainer.style.display = 'none';
+      }, 2000); // Notifikasi hilang setelah 2 detik
+    }
+  };
+
+  // --- Tombol Musik ---
+  const toggleMusicButton = document.getElementById('toggleMusic');
+  const backgroundMusic = document.getElementById('bg-music');
+  let isPlaying = false;
+
+  if (toggleMusicButton && backgroundMusic) {
     toggleMusicButton.addEventListener('click', () => {
       if (isPlaying) {
-        bgMusic.pause();
+        backgroundMusic.pause();
+        toggleMusicButton.innerHTML = '<i class="fas fa-play"></i>';
       } else {
-        bgMusic.play().catch(error => {
-          console.warn("Autoplay dicegah oleh browser:", error);
-        });
+        backgroundMusic.play();
+        toggleMusicButton.innerHTML = '<i class="fas fa-pause"></i>';
       }
       isPlaying = !isPlaying;
-      updatePlayPauseIcon(isPlaying);
     });
-
-    document.addEventListener('click', () => {
-      if (!isPlaying) {
-        bgMusic.play().catch(error => {
-          console.warn("Autoplay dicegah oleh browser:", error);
-        });
-        isPlaying = true;
-        updatePlayPauseIcon(isPlaying);
-      }
-    });
-
-    updatePlayPauseIcon(isPlaying);
   }
-})();
+});
