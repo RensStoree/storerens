@@ -7,20 +7,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // -------------------- Pencarian (Halaman Utama) --------------------
+  // -------------------- Pencarian (Halaman Utama) - MODIFIKASI --------------------
   const searchInput = document.getElementById("searchInput");
   const searchButton = document.getElementById("searchButton");
   const gameListContainer = document.getElementById("gameListContainer");
   const gameCards = gameListContainer ? gameListContainer.querySelectorAll(".game-card") : [];
 
-  if (searchButton && searchInput && gameListContainer && gameCards.length > 0) {
+  if (searchButton && searchInput) {
     searchButton.addEventListener("click", () => {
       const query = searchInput.value.toLowerCase();
-      gameCards.forEach((card) => {
-        const gameName = card.querySelector("h3").textContent.toLowerCase();
-        const match = gameName.includes(query);
-        card.style.display = match ? "block" : "none";
-      });
+      localStorage.setItem("searchQuery", query); // Simpan kata kunci pencarian
+      window.location.href = "../file/game.html"; // Arahkan ke index2.html
     });
 
     searchInput.addEventListener("input", () => {
