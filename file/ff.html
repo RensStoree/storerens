@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Top Up Free Fire - Rens Store</title>
+  <link rel="stylesheet" href="../css/style2.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="../images/freefire.jpg" alt="Logo Free Fire">
+      <h2>Top Up Free Fire</h2>
+    </div>
+    <div class="form-group">
+      <label for="gameId">ID Pengguna:</label>
+      <input type="text" id="gameId" placeholder="Masukkan ID Pengguna">
+      <span id="gameIdError" style="color: red; margin-left: 5px; display: none;">&#9888;</span>
+  </div>
+    <div class="form-group">
+      <label>Pilih Nominal:</label>
+      <div class="form-group">
+        <label>Membership & Card:</label>
+        <div class="nominal-options">
+          <div class="nominal-button">Level Up Pass<br><small>Rp 14.767</small></div>
+          <div class="nominal-button">Member Mingguan<br><small>Rp 29.531</small></div>
+          <div class="nominal-button">BP Card<br><small>Rp 44.297</small></div>
+          <div class="nominal-button">Member Bulanan<br><small>Rp 88.592</small></div>
+        </div>
+</div>
+
+<div class="form-group">
+  <label>Top Up Instant:</label>
+  <div class="nominal-options">
+    <div class="nominal-button">5 Diamonds<br><small>Rp 921</small></div>
+    <div class="nominal-button">20 Diamonds<br><small>Rp 3.676</small></div>
+    <div class="nominal-button">50 Diamonds<br><small>Rp 7.352</small></div>
+    <div class="nominal-button">70 Diamonds<br><small>Rp 9.413</small></div>
+    <div class="nominal-button">100 Diamonds<br><small>Rp 14.703</small></div>
+    <div class="nominal-button">120 Diamonds<br><small>Rp 16.764</small></div>
+    <div class="nominal-button">140 Diamonds<br><small>Rp 18.824</small></div>
+    <div class="nominal-button">200 Diamonds<br><small>Rp 29.406</small></div>
+    <div class="nominal-button">210 Diamonds<br><small>Rp 28.237</small></div>
+    <div class="nominal-button">280 Diamonds<br><small>Rp 37.648</small></div>
+    <div class="nominal-button">355 Diamonds<br><small>Rp 47.060</small></div>
+    <div class="nominal-button">400 Diamonds<br><small>Rp 54.412</small></div>
+    <div class="nominal-button">475 Diamonds<br><small>Rp 63.823</small></div>
+    <div class="nominal-button">500 Diamonds<br><small>Rp 66.803</small></div>
+    <div class="nominal-button">520 Diamonds<br><small>Rp 69.559</small></div>
+    <div class="nominal-button">720 Diamonds<br><small>Rp 94.120</small></div>
+    <div class="nominal-button">820 Diamonds<br><small>Rp 108.823</small></div>
+    <div class="nominal-button">860 Diamonds<br><small>Rp 133.344</small></div>
+    <div class="nominal-button">1075 Diamonds<br><small>Rp 141.179</small></div>
+    <div class="nominal-button">1440 Diamonds<br><small>Rp 188.239</small></div>
+    <div class="nominal-button">2100 Diamonds<br><small>Rp 275.704</small></div>
+    <div class="nominal-button">2160 Diamonds<br><small>Rp 282.359</small></div>
+    <div class="nominal-button">2180 Diamonds<br><small>Rp 282.359</small></div>
+    <div class="nominal-button">2720 Diamonds<br><small>Rp 357.655</small></div>
+    <div class="nominal-button">3640 Diamonds<br><small>Rp 470.598</small></div>
+    <div class="nominal-button">3800 Diamonds<br><small>Rp 493.098</small></div>
+    <div class="nominal-button">4000 Diamonds<br><small>Rp 518.576</small></div>
+    <div class="nominal-button">6900 Diamonds<br><small>Rp 895.054</small></div>
+    <div class="nominal-button">7290 Diamonds<br><small>Rp 951.395</small></div>
+    <div class="nominal-button">9800 Diamonds<br><small>Rp 1.268.553</small></div>
+    <div class="nominal-button">73100 Diamonds<br><small>Rp 9.208.948</small></div>
+  </div>
+</div>
+
+      <input type="hidden" id="selectedNominal" name="selectedNominal">
+    </div>
+        <div class="form-group payment-methods">
+      <label>Pilih Metode Pembayaran:</label>
+      <div class="payment-option">
+        <input type="radio" id="dana" name="paymentMethod" value="dana">
+        <img src="../images/dana.jpg" alt="DANA">
+        <label for="dana">DANA</label>
+      </div>
+      <div class="payment-option">
+        <input type="radio" id="ovo" name="paymentMethod" value="ovo">
+        <img src="path/to/ovo-icon.png" alt="OVO">
+        <label for="ovo">OVO</label>
+      </div>
+      <div class="payment-option">
+        <input type="radio" id="gopay" name="paymentMethod" value="gopay">
+        <img src="path/to/gopay-icon.png" alt="GoPay">
+        <label for="gopay">GoPay</label>
+      </div>
+      <div class="payment-option">
+        <input type="radio" id="shopeepay" name="paymentMethod" value="shopeepay">
+        <img src="path/to/shopeepay-icon.png" alt="ShopeePay">
+        <label for="shopeepay">ShopeePay</label>
+      </div>
+      <div class="payment-option">
+        <input type="radio" id="bank_transfer" name="paymentMethod" value="bank_transfer">
+        <img src="path/to/bank-icon.png" alt="Transfer Bank">
+        <label for="bank_transfer">Transfer Bank</label>
+      </div>
+      </div>
+    <button onclick="prosesTopUp()">Top Up Sekarang</button>
+  </div>
+
+  <script src="../js/script1.js"></script>
+</body>
+</html>
