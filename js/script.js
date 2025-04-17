@@ -1,162 +1,240 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // --- Preloader ---
-  const preloader = document.getElementById('preloader');
+document.addEventListener("DOMContentLoaded", function () {
+  // -------------------- Preloader --------------------
+  const preloader = document.getElementById("preloader");
   if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.style.display = 'none';
+    window.addEventListener("load", () => {
+      preloader.style.display = "none";
     });
   }
 
-  // --- Pencarian Game ---
-  const searchInput = document.getElementById('searchInput');
-  const searchButton = document.getElementById('searchButton');
-  const searchIcon = document.getElementById('searchIcon');
-  const gameListContainer = document.querySelector('.game-list');
-  const gameButtons = gameListContainer ? gameListContainer.querySelectorAll('.cool-button') : [];
+  // -------------------- Pencarian (Halaman Utama) --------------------
+  const searchInput = document.getElementById("searchInput");
+  const searchButton = document.getElementById("searchButton");
+  const gameListContainer = document.getElementById("gameListContainer");
+  const gameCards = gameListContainer ? gameListContainer.querySelectorAll(".game-card") : [];
 
-  if (searchInput && searchButton && searchIcon && gameButtons.length > 0) {
-    searchButton.addEventListener('click', () => {
-      filterGames(searchInput.value.toLowerCase().trim());
-    });
-
-    searchInput.addEventListener('input', () => {
-      filterGames(searchInput.value.toLowerCase().trim());
-    });
-
-    const filterGames = (searchTerm) => {
-      let found = false;
-      gameButtons.forEach(button => {
-        const gameName = button.textContent.toLowerCase().trim();
-        if (gameName.includes(searchTerm)) {
-          button.style.display = 'inline-block';
-          found = true;
-        } else {
-          button.style.display = 'none';
-        }
+  if (searchButton && searchInput && gameListContainer && gameCards.length > 0) {
+    searchButton.addEventListener("click", () => {
+      const query = searchInput.value.toLowerCase();
+      gameCards.forEach((card) => {
+        const gameName = card.querySelector("h3").textContent.toLowerCase();
+        const match = gameName.includes(query);
+        card.style.display = match ? "block" : "none";
       });
-      searchIcon.style.display = searchTerm !== '' && found ? 'inline' : 'none';
-    };
+    });
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase();
+      gameCards.forEach((card) => {
+        const gameName = card.querySelector("h3").textContent.toLowerCase();
+        const match = gameName.includes(query);
+        card.style.display = match ? "block" : "none";
+      });
+    });
   }
 
-  // --- Filter Kategori ---
-  const categoryButtons = document.querySelectorAll('.category-button');
-  if (categoryButtons.length > 0 && gameListContainer && gameButtons.length > 0) {
-    categoryButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const category = this.dataset.category;
+  // -------------------- Filter Kategori (Halaman Utama) --------------------
+  const categoryButtons = document.querySelectorAll(".category-button");
+  categoryButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      categoryButtons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
 
-        categoryButtons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-
-        gameButtons.forEach(gameButton => {
-          const gameCategories = gameButton.dataset.category ? gameButton.dataset.category.split(' ') : [];
-          if (category === 'all' || gameCategories.includes(category)) {
-            gameButton.style.display = 'inline-block';
-          } else {
-            gameButton.style.display = 'none';
-          }
-        });
+      const selected = btn.getAttribute("data-category");
+      gameCards.forEach((card) => {
+        const categories = card.getAttribute("data-category");
+        card.style.display =
+          selected === "all" || (categories && categories.includes(selected))
+            ? "block"
+            : "none";
       });
     });
+  });
 
-    // Set kategori 'Semua' aktif secara default
-    const allCategoryButton = document.querySelector('.category-button[data-category="all"]');
-    if (allCategoryButton) {
-      allCategoryButton.classList.add('active');
+  // -------------------- Favorit (Halaman Utama) --------------------
+  const favoriteGamesButton = document.getElementById("favoriteGamesButton");
+  const favoriteGamesList = document.getElementById("favoriteGamesList");
+  const favoriteContainer = document.getElementById("favoriteGamesContainer");
+  const favoriteCount = document.getElementById("favoriteCount");
+  const notificationContainer = document.getElementById("notification-container");
+
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  function updateFavorites() {
+    if (favoriteContainer) {
+      favoriteContainer.innerHTML = "";
+      favorites.forEach((name) => {
+        const div = document.createElement("div");
+        div.className = "cool-button";
+        div.textContent = name;
+        favoriteContainer.appendChild(div);
+      });
+    }
+    if (favoriteCount) {
+      favoriteCount.textContent = favorites.length;
     }
   }
 
-  // --- Favorit Game ---
-  const favoriteButtons = document.querySelectorAll('.favorite-button');
-  const favoriteGamesButton = document.getElementById('favoriteGamesButton');
-  const favoriteGamesList = document.getElementById('favoriteGamesList');
-  const favoriteGamesContainer = document.getElementById('favoriteGamesContainer');
-  const favoriteCountSpan = document.getElementById('favoriteCount');
-  let favoriteGames = JSON.parse(localStorage.getItem('favoriteGames')) || [];
-
-  const updateFavoriteCount = () => {
-    favoriteCountSpan.textContent = favoriteGames.length;
-  };
-
-  const renderFavoriteGames = () => {
-    favoriteGamesContainer.innerHTML = '';
-    if (favoriteGames.length > 0) {
-      favoriteGames.forEach(gameName => {
-        const gameLink = document.createElement('a');
-        gameLink.href = `harga.html?game=${gameName.toLowerCase().replace(/ /g, '')}#${gameName.toLowerCase().replace(/ /g, '')}`;
-        gameLink.classList.add('cool-button', 'favorite-game-item');
-        gameLink.textContent = gameName;
-        favoriteGamesContainer.appendChild(gameLink);
-      });
-      favoriteGamesList.style.display = 'block';
-    } else {
-      favoriteGamesList.style.display = 'none';
-    }
-    updateFavoriteCount();
-  };
-
-  const toggleFavorite = (gameName, button) => {
-    const index = favoriteGames.indexOf(gameName);
-    if (index > -1) {
-      favoriteGames.splice(index, 1);
-      button.classList.remove('favorited');
-      showNotification(`${gameName} dihapus dari favorit.`);
-    } else {
-      favoriteGames.push(gameName);
-      button.classList.add('favorited');
-      showNotification(`${gameName} ditambahkan ke favorit!`);
-    }
-    localStorage.setItem('favoriteGames', JSON.stringify(favoriteGames));
-    renderFavoriteGames();
-  };
-
-  if (favoriteButtons.length > 0 && favoriteGamesButton && favoriteGamesList && favoriteGamesContainer && favoriteCountSpan) {
-    favoriteButtons.forEach(button => {
-      const gameName = button.dataset.gameName;
-      if (favoriteGames.includes(gameName)) {
-        button.classList.add('favorited');
+  const favoriteButtons = document.querySelectorAll(".game-card .favorite-button");
+  favoriteButtons.forEach(button => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      const gameCard = button.closest('.game-card');
+      const gameName = gameCard.getAttribute("data-game-name");
+      if (gameName && !favorites.includes(gameName)) {
+        favorites.push(gameName);
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+        updateFavorites();
+        showNotification(`${gameName} ditambahkan ke favorit!`);
+      } else if (gameName && favorites.includes(gameName)) {
+        favorites = favorites.filter(name => name !== gameName);
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+        updateFavorites();
+        showNotification(`${gameName} dihapus dari favorit!`);
       }
-      button.addEventListener('click', function(event) {
-        event.preventDefault();
-        toggleFavorite(gameName, this);
-      });
     });
+  });
 
-    favoriteGamesButton.addEventListener('click', (event) => {
-      event.preventDefault();
-      favoriteGamesList.style.display = favoriteGamesList.style.display === 'none' ? 'block' : 'none';
+  if (favoriteGamesButton) {
+    favoriteGamesButton.addEventListener("click", () => {
+      if (favoriteGamesList) {
+        favoriteGamesList.style.display =
+          favoriteGamesList.style.display === "none" ? "block" : "none";
+      }
     });
-
-    renderFavoriteGames(); // Initial render
   }
 
-  // --- Notifikasi ---
-  const notificationContainer = document.getElementById('notification-container');
-  const showNotification = (message) => {
+  function showNotification(msg) {
     if (notificationContainer) {
-      notificationContainer.textContent = message;
-      notificationContainer.style.display = 'block';
+      notificationContainer.textContent = msg;
+      notificationContainer.style.display = "block";
       setTimeout(() => {
-        notificationContainer.style.display = 'none';
-      }, 2000); // Notifikasi hilang setelah 2 detik
+        notificationContainer.style.display = "none";
+      }, 3000);
     }
-  };
+  }
 
-  // --- Tombol Musik ---
-  const toggleMusicButton = document.getElementById('toggleMusic');
-  const backgroundMusic = document.getElementById('bg-music');
+  updateFavorites();
+
+  // -------------------- Tombol Musik (Semua Halaman) --------------------
+  const musicButton = document.getElementById("toggleMusic");
+  const bgMusic = document.getElementById("bg-music");
   let isPlaying = false;
 
-  if (toggleMusicButton && backgroundMusic) {
-    toggleMusicButton.addEventListener('click', () => {
-      if (isPlaying) {
-        backgroundMusic.pause();
-        toggleMusicButton.innerHTML = '<i class="fas fa-play"></i>';
+  if (musicButton && bgMusic) {
+    musicButton.addEventListener("click", () => {
+      if (!isPlaying) {
+        bgMusic.play().catch(error => console.error("Gagal memutar musik:", error));
+        musicButton.innerHTML = '<i class="fas fa-pause"></i>';
       } else {
-        backgroundMusic.play();
-        toggleMusicButton.innerHTML = '<i class="fas fa-pause"></i>';
+        bgMusic.pause();
+        musicButton.innerHTML = '<i class="fas fa-play"></i>';
       }
       isPlaying = !isPlaying;
     });
+
+    window.addEventListener('load', () => {
+      const isMusicPlaying = localStorage.getItem('musicPlaying') === 'true';
+      if (isMusicPlaying) {
+        bgMusic.play().catch(error => console.error("Gagal memutar musik saat load:", error));
+        musicButton.innerHTML = '<i class="fas fa-pause"></i>';
+        isPlaying = true;
+      } else {
+        bgMusic.pause();
+        musicButton.innerHTML = '<i class="fas fa-play"></i>';
+        isPlaying = false;
+      }
+    });
+
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('musicPlaying', isPlaying);
+    });
   }
+
+  // -------------------- Mode Gelap/Terang (Semua Halaman) --------------------
+  const toggleMode = document.getElementById("toggleMode");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  let currentMode = localStorage.getItem("theme") || (prefersDark ? "dark" : "light");
+
+  function applyMode(mode) {
+    if (mode === "light") {
+      document.body.classList.add("light-mode");
+      if (toggleMode) {
+        toggleMode.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    } else {
+      document.body.classList.remove("light-mode");
+      if (toggleMode) {
+        toggleMode.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+    }
+    localStorage.setItem("theme", mode);
+  }
+
+  if (toggleMode) {
+    toggleMode.addEventListener("click", () => {
+      currentMode = currentMode === "dark" ? "light" : "dark";
+      applyMode(currentMode);
+    });
+  }
+
+  applyMode(currentMode); // Terapkan mode yang disimpan atau default saat halaman dimuat
+
+  // -------------------- Tombol Top Up (Halaman Utama) --------------------
+  const topUpButtons = document.querySelectorAll('.game-card .game-actions .cool-button');
+
+  topUpButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      event.preventDefault(); // Mencegah aksi default dari link
+      const gameCard = this.closest('.game-card');
+      const gameName = gameCard.querySelector('h3').textContent;
+      const topUpLink = this.getAttribute('href');
+
+      console.log(`Tombol Top Up diklik untuk game: ${gameName}`);
+      console.log(`Link Top Up: ${topUpLink}`);
+      window.location.href = topUpLink; // Arahkan ke halaman top up
+    });
+  });
+
+  // -------------------- Tombol Beli Sekarang (Halaman Top Up Free Fire - ff.html) --------------------
+  const buyNowButtonsFF = document.querySelectorAll('.container .button'); // Selector untuk tombol utama di ff.html
+
+  buyNowButtonsFF.forEach(button => {
+    button.addEventListener('click', function(event) {
+      event.preventDefault(); // Mencegah aksi default dari link
+
+      const gameIdInput = document.getElementById('gameId');
+      const gameId = gameIdInput ? gameIdInput.value : 'ID tidak ditemukan';
+
+      console.log('Tombol Beli Sekarang (FF) Diklik:');
+      console.log('ID Game:', gameId);
+      alert(`Anda akan melakukan pembelian dengan ID Game: ${gameId}`);
+      // Tambahkan logika spesifik untuk pembelian Free Fire di sini
+      // window.location.href = '/konfirmasi-ff?id=' + gameId;
+    });
+  });
+
+  // -------------------- Tombol Beli Sekarang (Link Harga di Halaman Top Up Free Fire - ff.html) --------------------
+  const priceLinksFF = document.querySelectorAll('.container .price-link');
+
+  priceLinksFF.forEach(link => {
+    link.addEventListener('click', function(event) {
+      event.preventDefault(); // Mencegah aksi default dari link
+
+      const itemName = this.querySelector('span:first-child').textContent;
+      const price = this.querySelector('.symbol').textContent;
+      const linkHref = this.getAttribute('href');
+      const gameIdInput = document.getElementById('gameId');
+      const gameId = gameIdInput ? gameIdInput.value : 'ID tidak ditemukan';
+
+      console.log('Link Harga (FF) Diklik:');
+      console.log('Item:', itemName);
+      console.log('Harga:', price);
+      console.log('Link:', linkHref);
+      console.log('ID Game:', gameId);
+      alert(`Anda memilih untuk membeli ${itemName} seharga ${price} dengan ID Game: ${gameId}. Link: ${linkHref}`);
+      // Tambahkan logika untuk menangani klik pada link harga
+      // window.location.href = linkHref + '&id=' + gameId;
+    });
+  });
 });
