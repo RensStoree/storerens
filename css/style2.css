@@ -1,0 +1,242 @@
+/* Anime Style Layout */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom right, #000000, #003366); /* Black + Blue */
+  margin: 0;
+  padding: 0;
+  color: #fff; /* White text for contrast */
+  background-image: url('../images/bg-anime.jpg');
+  background-size: cover;
+  background-position: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 25px;
+  background-color: rgba(0, 0, 0, 0.8); /* Transparent black background */
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6); /* Black shadow */
+  backdrop-filter: blur(5px);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header img {
+  max-width: 100px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+.header h2 {
+  font-size: 28px;
+  color: #1e88e5; /* Bright blue */
+  text-shadow: 2px 2px 4px #000000; /* Black text shadow */
+}
+
+.top-banner marquee {
+  background-color: #1976d2; /* Dark blue */
+  padding: 8px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: #1e88e5; /* Bright blue */
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #1e88e5; /* Bright blue */
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #64b5f6; /* Light blue */
+}
+
+.error-icon {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  color: red;
+  display: none;
+}
+
+/* Nominal Buttons */
+.nominal-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); /* Flexible columns */
+  gap: 10px;
+}
+
+.nominal-button {
+  background-color: #003366; /* Dark blue */
+  border: 2px solid #1e88e5; /* Bright blue */
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+}
+
+.nominal-button:hover {
+  background-color: #1e88e5; /* Bright blue */
+  transform: scale(1.05);
+}
+
+.nominal-button.selected {
+  background-color: #1976d2; /* Dark blue */
+  color: white;
+  border-color: #1565c0;
+}
+
+/* Payment Method Style */
+.payment-methods {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns layout */
+  gap: 15px;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.payment-option img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.payment-option img:hover {
+  transform: scale(1.1);
+}
+
+.payment-option label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #001f33; /* Dark blue */
+  padding: 10px;
+  border: 2px solid #1e88e5; /* Bright blue */
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  color: white;
+}
+
+.payment-option label:hover {
+  background-color: #1976d2; /* Dark blue */
+  transform: scale(1.05);
+}
+
+/* Animasi getar */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+.payment-option input[type="radio"] {
+  display: none;
+}
+
+.payment-option input[type="radio"]:checked + label {
+  background-color: #1976d2; /* Dark blue */
+  color: white;
+  font-weight: bold;
+  animation: shake 0.5s ease-out; /* Shake animation */
+}
+
+/* Payment Method Selected */
+.payment-option input[type="radio"]:checked + label img {
+  animation: shake 0.5s ease-out;
+}
+
+/* Button */
+button {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background-color: #1e88e5; /* Bright blue */
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #1565c0; /* Dark blue */
+}
+
+/* Valid / Invalid ID */
+.valid {
+  border-color: #4caf50 !important;
+}
+
+.invalid {
+  border-color: red !important;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .nominal-options {
+    grid-template-columns: 1fr 1fr; /* Two buttons per row on smaller screens */
+  }
+
+  .payment-methods {
+    grid-template-columns: 1fr; /* Single column for payment options on mobile */
+  }
+
+  button {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
