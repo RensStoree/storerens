@@ -5,40 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Game Support - Rens Store</title>
   <!-- Font Awesome (Pilih satu versi) -->
-  <!-- Google Fonts - Bangers -->
-<link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-<!-- Google Fonts - Press Start 2P -->
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-<!-- Google Fonts - Russo One -->
-<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-<!-- Google Fonts - Orbitron -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <!-- Gaya CSS -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/dark-mode.css" />
-    <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
 </head>
-<!-- Preloader -->
-<div id="preloader">
-  <div class="loader">
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-  </div>
-</div>
+
 <body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loader">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+
   <!-- Logo Section -->
   <div class="logo-container">
-      <img src="images/logo-rensstore.png" alt="Logo Rens Store" class="logo" />
-      <a class="store-name">Rens Store</a>
-    </a>
+    <img src="images/logo-rensstore.png" alt="Logo Rens Store" class="logo" />
+    <a class="store-name">Rens Store</a>
   </div>
-  
+
   <!-- Tombol Toggle Menu -->
   <div id="menu-toggle" class="menu-toggle">
     <i class="fas fa-bars"></i>
   </div>
+
   <!-- Sidebar Kiri -->
   <div id="sidebar-menu" class="sidebar-menu">
     <div class="sidebar-header">
@@ -49,14 +47,9 @@
       <li><a href="#home">Home</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#games">Games</a></li>
-      <li><a href="#profile">Profile</a></li> <!-- Tambahkan item ini -->
+      <li><a href="#profile">Profile</a></li> 
       <li><a href="#contact">Contact</a></li>
     </ul>
-
-    <!-- Preloader -->
-    <div id="preloader">
-      <div class="spinner"></div>
-    </div>
   </div>
 
   <!-- Search Bar -->
@@ -66,141 +59,69 @@
     <button id="searchButton"><i class="fas fa-search"></i></button>
   </div>
 
-<!-- Game Logos Section -->
-   <div class="logo-group">
-   <a href="#" class="logo-button" title="Free Fire" title="fetchVariant('FREEFIRE001')">
-   <img src="images/freefire.jpg" alt="Free Fire" />
-  <span>Free Fire</span>
-   </a>
+  <!-- Game Logos Section -->
+  <div class="logo-group">
+    <!-- Free Fire -->
+    <a href="#" onclick="loadGame('ff.html', 'freefire')" class="logo-button" title="Free Fire">
+      <img src="images/freefire.jpg" alt="Free Fire" />
+      <span>Free Fire</span>
+    </a>
 
+    <!-- Call of Duty Mobile -->
+    <a href="#" onclick="loadGame('codm.html', 'codm')" class="logo-button" title="Call of Duty Mobile">
+      <img src="images/codm.jpg" alt="Call of Duty Mobile" />
+      <span>Call of Duty Mobile</span>
+    </a>
 
-  <a href="harga.html?game=codm#codm" class="logo-button" title="Call of Duty Mobile" >
-    <img src="images/codm.jpg" alt="Call of Duty Mobile" />
-    <span>Call of Duty Mobile</span>
-  </a>
+    <!-- Super Sus -->
+    <a href="#" onclick="loadGame('supersus.html', 'supersus')" class="logo-button" title="Super Sus">
+      <img src="images/supersus.jpg" alt="Super Sus" />
+      <span>Super Sus</span>
+    </a>
 
-  <a href="harga.html?game=supersus#supersus" class="logo-button" title="Super Sus">
-    <img src="images/supersus.jpg" alt="Super Sus" />
-    <span>Super Sus</span>
-  </a>
+    <!-- Mobile Legends -->
+    <a href="#" onclick="loadGame('mlbb.html', 'mlbb')" class="logo-button" title="Mobile Legends: Bang Bang">
+      <img src="images/mlbb-logo.png" alt="Mobile Legends: Bang Bang" />
+      <span>Mobile Legends</span>
+    </a>
 
-   <a href="harga.html?game=mlbb#mlbb" class="logo-button" title="Mobile Legends: Bang Bang" >
-    <img src="images/mlbb-logo.png" alt="Mobile Legends: Bang Bang" />
-    <span>Mobile Legends: Bang Bang</span>
-  </a> 
-  <a href="harga.html?game=pubgm#pubgm" class="logo-button" title="PUBG Mobile">
-    <img src="images/pubgm-logo.png" alt="PUBG Mobile" />
-    <span>PUBG Mobile</span>
-  </a>
+    <!-- PUBG Mobile -->
+    <a href="#" onclick="loadGame('pubgm.html', 'pubgm')" class="logo-button" title="PUBG Mobile">
+      <img src="images/pubgm-logo.png" alt="PUBG Mobile" />
+      <span>PUBG Mobile</span>
+    </a>
 
-  <a href="harga.html?game=genshinimpact#genshinimpact" class="logo-button" title="Genshin Impact" >
-    <img src="images/genshinimpact-logo.png" alt="Genshin Impact" />
-    <span>Genshin Impact</span>
-  </a>
-</div>
-<!-- Game Logos Section -->
-<div class="logo-group">
-  <a href="harga.html?game=valorant#valorant" class="logo-button" title="Valorant" >
-    <img src="images/valorant-logo.png" alt="Valorant" />
-    <span>Valorant</span>
-  </a>
+    <!-- Genshin Impact -->
+    <a href="#" onclick="loadGame('genshinimpact.html', 'genshinimpact')" class="logo-button" title="Genshin Impact">
+      <img src="images/genshinimpact-logo.png" alt="Genshin Impact" />
+      <span>Genshin Impact</span>
+    </a>
+  </div>
 
-  <a href="harga.html?game=fortnite#fortnite" class="logo-button" title="Fortnite" >
-    <img src="images/fortnite-logo.png" alt="Fortnite" />
-    <span>Fortnite</span>
-  </a>
+  <!-- Game Logos Section (Other Games) -->
+  <div class="logo-group">
+    <a href="#" onclick="loadGame('valorant.html', 'valorant')" class="logo-button" title="Valorant">
+      <img src="images/valorant-logo.png" alt="Valorant" />
+      <span>Valorant</span>
+    </a>
 
-  <a href="harga.html?game=apexlegends#apexlegends" class="logo-button" title="Apex Legends" >
-    <img src="images/apexlegends-logo.png" alt="Apex Legends" />
-    <span>Apex Legends</span>
-  </a>
+    <a href="#" onclick="loadGame('fortnite.html', 'fortnite')" class="logo-button" title="Fortnite">
+      <img src="images/fortnite-logo.png" alt="Fortnite" />
+      <span>Fortnite</span>
+    </a>
 
-  <a href="harga.html?game=leagueoflegends#leagueoflegends" class="logo-button" title="League of Legends" >
-    <img src="images/leagueoflegends-logo.png" alt="League of Legends" />
-    <span>League of Legends</span>
-  </a>
+    <a href="#" onclick="loadGame('apexlegends.html', 'apexlegends')" class="logo-button" title="Apex Legends">
+      <img src="images/apexlegends-logo.png" alt="Apex Legends" />
+      <span>Apex Legends</span>
+    </a>
 
-  <a href="harga.html?game=overwatch2#overwatch2" class="logo-button" title="Overwatch 2" >
-    <img src="images/overwatch2-logo.png" alt="Overwatch 2" />
-    <span>Overwatch 2</span>
-  </a>
+    <a href="#" onclick="loadGame('leagueoflegends.html', 'leagueoflegends')" class="logo-button" title="League of Legends">
+      <img src="images/leagueoflegends-logo.png" alt="League of Legends" />
+      <span>League of Legends</span>
+    </a>
+  </div>
 
-  <a href="harga.html?game=rainbowsixsiege#rainbowsixsiege" class="logo-button" title="Rainbow Six Siege" >
-    <img src="images/rainbowsixsiege-logo.png" alt="Rainbow Six Siege" />
-    <span>Rainbow Six Siege</span>
-  </a>
-
-  <a href="harga.html?game=callofduty#callofduty" class="logo-button" title="Call of Duty" >
-    <img src="images/cod-logo.png" alt="Call of Duty" />
-    <span>Call of Duty</span>
-  </a>
-
-  <a href="harga.html?game=pubg#pubg" class="logo-button" title="PUBG" >
-    <img src="images/pubg-logo.png" alt="PUBG" />
-    <span>PUBG</span>
-  </a>
-
-  <a href="harga.html?game=genshinimpact#genshinimpact" class="logo-button" title="Genshin Impact" >
-    <img src="images/genshinimpact-logo.png" alt="Genshin Impact" />
-    <span>Genshin Impact</span>
-  </a>
-
-  <a href="harga.html?game=freefire#freefire" class="logo-button" title="Free Fire" >
-    <img src="images/freefire-logo.png" alt="Free Fire" />
-    <span>Free Fire</span>
-  </a>
-
-  <a href="harga.html?game=mobilelegends#mobilelegends" class="logo-button" title="Mobile Legends" >
-    <img src="images/ml-logo.png" alt="Mobile Legends" />
-    <span>Mobile Legends</span>
-  </a>
-
-  <a href="harga.html?game=valorant#valorant" class="logo-button" title="Valorant" >
-    <img src="images/valorant-logo.png" alt="Valorant" />
-    <span>Valorant</span>
-  </a>
-
-  <a href="harga.html?game=fifa22#fifa22" class="logo-button" title="FIFA 22" >
-    <img src="images/fifa22-logo.png" alt="FIFA 22" />
-    <span>FIFA 22</span>
-  </a>
-
-  <a href="harga.html?game=minecraft#minecraft" class="logo-button" title="Minecraft" >
-    <img src="images/minecraft-logo.png" alt="Minecraft" />
-    <span>Minecraft</span>
-  </a>
-
-  <a href="harga.html?game=rocketleague#rocketleague" class="logo-button" title="Rocket League" >
-    <img src="images/rocketleague-logo.png" alt="Rocket League" />
-    <span>Rocket League</span>
-  </a>
-
-  <a href="harga.html?game=valhallavikings#valhallavikings" class="logo-button" title="Valhalla Vikings" >
-    <img src="images/valhallavikings-logo.png" alt="Valhalla Vikings" />
-    <span>Valhalla Vikings</span>
-  </a>
-
-  <a href="harga.html?game=worldwar3#worldwar3" class="logo-button" title="World War 3" >
-    <img src="images/worldwar3-logo.png" alt="World War 3" />
-    <span>World War 3</span>
-  </a>
-
-  <a href="harga.html?game=fortnite#fortnite" class="logo-button" title="Fortnite" >
-    <img src="images/fortnite-logo.png" alt="Fortnite" />
-    <span>Fortnite</span>
-  </a>
-
-  <a href="harga.html?game=destiny2#destiny2" class="logo-button" title="Destiny 2" >
-    <img src="images/destiny2-logo.png" alt="Destiny 2" />
-    <span>Destiny 2</span>
-  </a>
-
-  <a href="harga.html?game=counterstrike#counterstrike" class="logo-button" title="Counter-Strike" >
-    <img src="images/counterstrike-logo.png" alt="Counter-Strike" />
-    <span>Counter-Strike</span>
-  </a>
-</div> 
-
+  <!-- Additional Game Logos (Mobile Legends, COD, FIFA, etc.) -->
 
   <!-- Dark/Light Mode Toggle Button -->
   <button id="modeToggle" class="mode-toggle-button">
