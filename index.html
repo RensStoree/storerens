@@ -1,16 +1,15 @@
+  <!-- index.html -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Game Support - Rens Store</title>
-  <!-- Font Awesome (Pilih satu versi) -->
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <!-- Gaya CSS -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/dark-mode.css" />
   <link rel="stylesheet" href="css/sidebar.css" />
@@ -19,138 +18,106 @@
 <body>
   <!-- Preloader -->
   <div id="preloader">
-    <div class="loader">
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
+    <div class="loader"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main-content">
+    <div class="logo-container">
+      <img src="images/logo-rensstore.png" alt="Logo Rens Store" class="logo" />
+      <a class="store-name">Rens Store</a>
     </div>
-  </div>
 
-  <!-- Logo Section -->
-  <div class="logo-container">
-    <img src="images/logo-rensstore.png" alt="Logo Rens Store" class="logo" />
-    <a class="store-name">Rens Store</a>
-  </div>
+    <div id="menu-toggle" class="menu-toggle"><i class="fas fa-bars"></i></div>
 
-  <!-- Tombol Toggle Menu -->
-  <div id="menu-toggle" class="menu-toggle">
-    <i class="fas fa-bars"></i>
-  </div>
-
-  <!-- Sidebar Kiri -->
-  <div id="sidebar-menu" class="sidebar-menu">
-    <div class="sidebar-header">
-      <span id="close-sidebar" class="close-btn">&times;</span>
-      <h2>Menu</h2>
+    <div id="sidebar-menu" class="sidebar-menu">
+      <div class="sidebar-header">
+        <span id="close-sidebar" class="close-btn">&times;</span>
+        <h2>Menu</h2>
+      </div>
+      <ul class="sidebar-list">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
-    <ul class="sidebar-list">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#games">Games</a></li>
-      <li><a href="#profile">Profile</a></li> 
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Cari Game..." />
+      <i id="searchIcon" class="fas fa-check" style="display: none; margin-left: 5px; color: green;"></i>
+      <button id="searchButton"><i class="fas fa-search"></i></button>
+    </div>
+
+    <div class="logo-group">
+  <a href="#" onclick="loadGame('file/ff.html')" class="logo-button" title="Free Fire">
+    <img src="images/freefire.jpg" alt="Free Fire" />
+    <span>Free Fire</span>
+  </a>
+
+  <a href="#" onclick="loadGame('file/codm.html')" class="logo-button" title="Call of Duty Mobile">
+    <img src="images/codm.jpg" alt="Call of Duty Mobile" />
+    <span>COD Mobile</span>
+  </a>
+
+  <a href="#" onclick="loadGame('file/pubg.html')" class="logo-button" title="PUBG Mobile">
+    <img src="images/pubg.jpg" alt="PUBG Mobile" />
+    <span>PUBG Mobile</span>
+  </a>
+
+  <a href="#" onclick="loadGame('file/ml.html')" class="logo-button" title="Mobile Legends">
+    <img src="images/ml.jpg" alt="Mobile Legends" />
+    <span>Mobile Legends</span>
+  </a>
+
+  <a href="#" onclick="loadGame('file/genshin.html')" class="logo-button" title="Genshin Impact">
+    <img src="images/genshin.jpg" alt="Genshin Impact" />
+    <span>Genshin Impact</span>
+  </a>
+
+  <a href="#" onclick="loadGame('file/valorant.html')" class="logo-button" title="Valorant">
+    <img src="images/valorant.jpg" alt="Valorant" />
+    <span>Valorant</span>
+  </a>
+
+  <a href="#" onclick="loadGame('file/honorofkings.html')" class="logo-button" title="Honor of Kings">
+    <img src="images/honorofkings.jpg" alt="Honor of Kings" />
+    <span>Honor of Kings</span>
+  </a>
+</div>
+
+
+    <button id="modeToggle" class="mode-toggle-button"><i id="modeIcon" class="fas fa-sun"></i></button>
+
+    <section class="how-to-topup">
+      <h2>Cara Top Up</h2>
+      <ol>
+        <li>Pilih game yang ingin di-top up.</li>
+        <li>Masukkan ID Pengguna dan Server (jika diperlukan).</li>
+        <li>Pilih jumlah top up yang diinginkan.</li>
+        <li>Selesaikan pembayaran.</li>
+        <li>Koin atau diamond akan segera ditambahkan ke akun Anda.</li>
+      </ol>
+    </section>
+
+    <div class="section" id="kontak">
+      <a href="https://wa.me/6283162874553" class="wa-button" title="Chat WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://instagram.com/storerenss" class="ig-link" title="Instagram @rensstore.id"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <footer>
+      &copy; 2025 Rens Store. All rights reserved.
+    </footer>
   </div>
+  <!-- Musik Otomatis Play -->
+  <audio id="bg-music" loop autoplay>
+    <source src="anime.mp3" type="audio/mpeg" />
+  </audio>
+  <!-- Tempat konten game akan dimuat -->
+  <div id="game-content" style="display: none;"></div>
 
-  <!-- Search Bar -->
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Cari Game..." />
-    <i id="searchIcon" class="fas fa-check" style="display: none; margin-left: 5px; color: green;"></i>
-    <button id="searchButton"><i class="fas fa-search"></i></button>
-  </div>
-
-  <!-- Game Logos Section -->
-  <div class="logo-group">
-    <!-- Free Fire -->
-<!-- Free Fire -->
-   <a href="#" onclick="goToGame('#freefire')" class="logo-button" title="Free Fire">
-  <img src="images/freefire.jpg" alt="Free Fire" />
-  <span>Free Fire</span>
-   </a>
-
-    <!-- Call of Duty Mobile -->
-    <a href="#" onclick="loadGame('codm.html', 'codm')" class="logo-button" title="Call of Duty Mobile">
-      <img src="images/codm.jpg" alt="Call of Duty Mobile" />
-      <span>Call of Duty Mobile</span>
-    </a>
-
-    <!-- Super Sus -->
-    <a href="#" onclick="loadGame('supersus.html', 'supersus')" class="logo-button" title="Super Sus">
-      <img src="images/supersus.jpg" alt="Super Sus" />
-      <span>Super Sus</span>
-    </a>
-
-    <!-- Mobile Legends -->
-    <a href="#" onclick="loadGame('mlbb.html', 'mlbb')" class="logo-button" title="Mobile Legends: Bang Bang">
-      <img src="images/mlbb-logo.png" alt="Mobile Legends: Bang Bang" />
-      <span>Mobile Legends</span>
-    </a>
-
-    <!-- PUBG Mobile -->
-    <a href="#" onclick="loadGame('pubgm.html', 'pubgm')" class="logo-button" title="PUBG Mobile">
-      <img src="images/pubgm-logo.png" alt="PUBG Mobile" />
-      <span>PUBG Mobile</span>
-    </a>
-
-    <!-- Genshin Impact -->
-    <a href="#" onclick="loadGame('genshinimpact.html', 'genshinimpact')" class="logo-button" title="Genshin Impact">
-      <img src="images/genshinimpact-logo.png" alt="Genshin Impact" />
-      <span>Genshin Impact</span>
-    </a>
-  </div>
-
-  <!-- Game Logos Section (Other Games) -->
-  <div class="logo-group">
-    <a href="#" onclick="loadGame('valorant.html', 'valorant')" class="logo-button" title="Valorant">
-      <img src="images/valorant-logo.png" alt="Valorant" />
-      <span>Valorant</span>
-    </a>
-
-    <a href="#" onclick="loadGame('fortnite.html', 'fortnite')" class="logo-button" title="Fortnite">
-      <img src="images/fortnite-logo.png" alt="Fortnite" />
-      <span>Fortnite</span>
-    </a>
-
-    <a href="#" onclick="loadGame('apexlegends.html', 'apexlegends')" class="logo-button" title="Apex Legends">
-      <img src="images/apexlegends-logo.png" alt="Apex Legends" />
-      <span>Apex Legends</span>
-    </a>
-
-    <a href="#" onclick="loadGame('leagueoflegends.html', 'leagueoflegends')" class="logo-button" title="League of Legends">
-      <img src="images/leagueoflegends-logo.png" alt="League of Legends" />
-      <span>League of Legends</span>
-    </a>
-  </div>
-
-  <!-- Dark/Light Mode Toggle Button -->
-  <button id="modeToggle" class="mode-toggle-button">
-    <i id="modeIcon" class="fas fa-sun"></i>
-  </button>
-
-  <!-- How to Top Up Section -->
-  <section class="how-to-topup">
-    <h2>Cara Top Up</h2>
-    <ol>
-      <li>Pilih game yang ingin di-top up.</li>
-      <li>Masukkan ID Pengguna dan Server (jika diperlukan).</li>
-      <li>Pilih jumlah top up yang diinginkan.</li>
-      <li>Selesaikan pembayaran.</li>
-      <li>Koin atau diamond akan segera ditambahkan ke akun Anda.</li>
-    </ol>
-  </section>
-
-  <!-- Contact Section -->
-  <div class="section" id="kontak">
-    <a href="https://wa.me/6283162874553" class="wa-button" title="Chat WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://instagram.com/storerenss" class="ig-link" title="Instagram @rensstore.id"><i class="fab fa-instagram"></i></a>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 Rens Store. All rights reserved.
-  </footer>
-
-  <!-- Particles -->
+  <!-- Partikel -->
   <div class="particles">
     <div class="particle" style="top: 10%; left: 20%; animation-delay: 0.5s;"></div>
     <div class="particle" style="top: 50%; left: 40%; animation-delay: 1s;"></div>
@@ -159,20 +126,8 @@
     <div class="particle" style="top: 70%; left: 10%; animation-delay: 2.5s;"></div>
   </div>
 
-  <!-- Music Toggle -->
-  <button id="toggleMusic" class="music-button"><i class="fas fa-play"></i></button>
-  <audio id="bg-music" loop>
-    <source src="anime.mp3" type="audio/mpeg" />
-    <p>Browser tidak mendukung audio</p>
-  </audio>
 
-  <!-- Notification Container -->
-  <div id="notification-container" style="display: none;"></div>
 
-  <!-- Tempat konten game akan dimuat -->
-  <div id="game-content"></div>
-
-  <!-- Scripts -->
   <script src="js/script.js"></script>
 </body>
 </html>
