@@ -149,3 +149,6 @@ function loadGame(page, slug) {
       document.getElementById('game-content').innerHTML = "<p>Terjadi kesalahan saat memuat halaman game.</p>";
     });
 }
+function goToGame(url) {
+  window.location.href = url;
+}
