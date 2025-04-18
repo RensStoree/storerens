@@ -1,103 +1,97 @@
-document.addEventListener("DOMContentLoaded", function () {
-  function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, '\\$&');
-    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-      results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+// script1.js
+
+function isNumeric(str) {
+  return /^\d+$/.test(str);
+}
+
+function validateGameId() {
+  const gameIdInput = document.getElementById("gameId");
+  const gameId = gameIdInput.value.trim();
+  const errorIcon = document.getElementById("gameIdError");
+  const errorMessage = document.getElementById("gameIdErrorMessage");
+
+  // Allow only numeric input and show symbol if it's invalid
+  if (gameId.length < 8 || !isNumeric(gameId)) {
+    gameIdInput.classList.remove("valid");
+    gameIdInput.classList.add("invalid");
+    errorIcon.style.display = "inline";
+    errorMessage.style.display = "block";
+    return false;
+  } else {
+    gameIdInput.classList.remove("invalid");
+    gameIdInput.classList.add("valid");
+    errorIcon.style.display = "none";
+    errorMessage.style.display = "none";
+    return true;
+  }
+}
+
+// Prevent non-numeric characters from being entered and limit to 8 digits
+document.getElementById("gameId").addEventListener("input", function (event) {
+  const gameIdInput = event.target;
+  let validValue = gameIdInput.value.replace(/\D/g, '');  // Replace non-digits with an empty string
+  
+  // Limit the input to 8 digits
+  if (validValue.length > 8) {
+    validValue = validValue.substring(0, 8);
   }
 
-  const gameIdInput = document.getElementById('gameId');
-  const gameIdFromURL = getParameterByName('id');
-  if (gameIdInput && gameIdFromURL) {
-    gameIdInput.value = gameIdFromURL;
-  }
-
-  // Validasi ID Game: hanya angka dan maksimal 8 digit
-  gameIdInput.addEventListener('input', function () {
-    this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8);
-  });
-
-  const nominalButtons = document.querySelectorAll('.nominal-button');
-  const selectedNominalInput = document.getElementById('selectedNominal');
-  const paymentOptions = document.querySelectorAll('.payment-methods .payment-option');
-  let selectedPaymentMethod = null;
-  let selectedPrice = null;
-  let selectedNominalText = null; // Tambahkan variabel untuk menyimpan teks nominal
-
-  nominalButtons.forEach(button => {
-    button.addEventListener('click', function () {
-      nominalButtons.forEach(btn => btn.classList.remove('selected'));
-      this.classList.add('selected');
-
-      // Ambil teks lengkap dari tombol sebagai nominal
-      selectedNominalText = this.innerText.split('\n')[0];
-      selectedNominalInput.value = selectedNominalText;
-
-      // Ambil harga dari elemen <small> di dalamnya
-      const priceElement = this.querySelector('small');
-      if (priceElement) {
-        const priceText = priceElement.innerText.replace('Rp ', '').replace(/\./g, '');
-        selectedPrice = priceText;
-      } else {
-        selectedPrice = null; // Reset harga jika tidak ditemukan
-      }
-    });
-  });
-
-  paymentOptions.forEach(option => {
-    option.addEventListener('click', function () {
-      const radio = this.querySelector('input[type="radio"]');
-      radio.checked = true;
-      selectedPaymentMethod = radio.value;
-    });
-  });
-
-  function formatRupiah(angka) {
-    return angka ? angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") : '';
-  }
-
-  function prosesTopUp() {
-    const gameId = gameIdInput.value;
-    const nominal = selectedNominalText; // Gunakan selectedNominalText yang lebih deskriptif
-    const paymentChecked = document.querySelector('input[name="paymentMethod"]:checked');
-
-    if (!gameId || gameId.length !== 8) {
-      alert('ID Pengguna harus terdiri dari 8 digit angka.');
-      return;
-    }
-    if (!nominal || !selectedPrice) {
-      alert('Pilih nominal top up terlebih dahulu.');
-      return;
-    }
-    if (!paymentChecked) {
-      alert('Pilih metode pembayaran terlebih dahulu.');
-      return;
-    }
-
-    const method = paymentChecked.value;
-    const number = "+6285331480855"; // Ganti sesuai nomor tujuan DANA, OVO, GOPAY
-    const waNumber = "6283162874553"; // Nomor WhatsApp Transfer Bank
-    const amount = selectedPrice;
-
-    if (method === 'dana') {
-      window.location.href = `https://link.dana.id/qr/transfer?phone=${number}&amount=${amount}`;
-    } else if (method === 'ovo') {
-      window.location.href = `ovo://transfer?phone=${number}&amount=${amount}`;
-    } else if (method === 'gopay') {
-      window.location.href = `gopay://pay?phone=${number}&amount=${amount}`;
-    } else if (method === 'shopeepay') {
-      window.location.href = `shopeepay://pay?phone=${number}&amount=${amount}`;
-    } else if (method === 'bank_transfer') {
-      const waMsg = `Saya ingin top up Free Fire\nID: ${gameId}\nNominal: ${nominal}\nHarga: Rp ${formatRupiah(amount)}\nMetode: Transfer Bank`;
-      window.location.href = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMsg)}`;
-    }
-  }
-
-  const topUpButton = document.querySelector('.container button');
-  if (topUpButton) {
-    topUpButton.addEventListener('click', prosesTopUp);
-  }
+  gameIdInput.value = validValue;  // Update the input with only numeric values
+  validateGameId();  // Revalidate the game ID after the input change
 });
+
+// Fungsi untuk mendeteksi nominal terpilih
+function getSelectedNominal() {
+  const allButtons = document.querySelectorAll(".nominal-button");
+  let selected = null;
+
+  allButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      allButtons.forEach(btn => btn.classList.remove("selected"));
+      button.classList.add("selected");
+      selected = button.innerText;
+    });
+  });
+
+  return () => {
+    const chosen = document.querySelector(".nominal-button.selected");
+    return chosen ? chosen.innerText : null;
+  };
+}
+
+const getNominal = getSelectedNominal();
+
+// Fungsi untuk ambil metode pembayaran
+function getSelectedPaymentMethod() {
+  const radios = document.getElementsByName("paymentMethod");
+  for (let i = 0; i < radios.length; i++) {
+    if (radios[i].checked) {
+      return radios[i].value;
+    }
+  }
+  return null;
+}
+
+// Fungsi utama
+function prosesTopUp() {
+  const validId = validateGameId();
+  const nominal = getNominal();
+  const paymentMethod = getSelectedPaymentMethod();
+
+  if (!validId) {
+    alert("Masukkan ID yang valid (minimal 8 angka).");
+    return;
+  }
+
+  if (!nominal) {
+    alert("Pilih nominal top up terlebih dahulu.");
+    return;
+  }
+
+  if (!paymentMethod) {
+    alert("Pilih metode pembayaran terlebih dahulu.");
+    return;
+  }
+
+  alert(`Top Up Berhasil!\n\nID: ${document.getElementById("gameId").value}\nNominal: ${nominal}\nPembayaran: ${paymentMethod}`);
+}
