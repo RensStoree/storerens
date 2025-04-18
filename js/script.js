@@ -120,35 +120,56 @@ function toggleMode() {
 if (modeToggleButton) {
   modeToggleButton.addEventListener('click', toggleMode);
 }
+
 document.addEventListener('contextmenu', (e) => {
   e.preventDefault();
 });
 
+// =====================
+// == GAME LOADING LOGIC ==
+// =====================
+function loadGame(page, slug) {
+  fetch(page)
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('game-content').innerHTML = html;
+      history.pushState({}, '', slug); // Bersihkan URL
+    })
+    .catch(error => {
+      console.error("Error loading the game page:", error);
+    });
+}
 
-
-  async function fetchVariant(code) {
-    const BASE_URL = "https://www.bakulvouchergame.com/id-id"; // Ganti dengan URL asli
-    const API_KEY = "8f107d34-3303-42b6-aa69-17f584745a58"; // Ganti dengan API key kamu
-    try {
-      const response = await fetch(`${BASE_URL}/api/v3/variant`, {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${API_KEY}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ code: code })
-      });
-      if (!response.ok) throw new Error("Gagal mengambil data!");
-      const data = await response.json();
-      console.log("Response:", data);
-      // Tampilkan notifikasi (jika ada container notifikasi)
-      const notification = document.getElementById("notification-container");
-      notification.innerText = JSON.stringify(data, null, 2);
-      notification.style.display = "block";
-
-    } catch (error) {
-      console.error("Error:", error);
+window.addEventListener('DOMContentLoaded', () => {
+  const path = window.location.pathname.replace('/', '');
+  if (path) {
+    // Mapping game ke file
+    const gameMap = {
+      freefire: 'ff.html',
+      codm: 'harga.html',
+      supersus: 'harga.html',
+      mlbb: 'harga.html',
+      pubgm: 'harga.html',
+      genshinimpact: 'harga.html',
+      valorant: 'harga.html',
+      fortnite: 'harga.html',
+      apexlegends: 'harga.html',
+      leagueoflegends: 'harga.html',
+      overwatch2: 'harga.html',
+      rainbowsixsiege: 'harga.html',
+      callofduty: 'harga.html',
+      pubg: 'harga.html',
+      mobilelegends: 'harga.html',
+      fifa22: 'harga.html',
+      minecraft: 'harga.html',
+      rocketleague: 'harga.html',
+      valhallavikings: 'harga.html',
+      worldwar3: 'harga.html',
+      destiny2: 'harga.html',
+      counterstrike: 'harga.html',
+    };
+    if (gameMap[path]) {
+      loadGame(gameMap[path], path);
     }
   }
-
-
+});
