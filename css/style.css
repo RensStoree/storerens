@@ -176,13 +176,26 @@ html, body {
   margin-top: 20px;
 }
 
-h1 {
-  font-size: 36px;
-  font-weight: bold;
-  color: white;
-  text-align: center;
-  margin: 40px 0 20px;
+.header h1 {
+  font-size: 28px;
+  font-family: 'Orbitron', sans-serif; /* atau ganti bebas */
+  color: #ffffff; /* Putih dominan */
+  text-shadow:
+    0 0 5px #1e88e5,
+    0 0 10px #1e88e5,
+    0 0 15px #000000,
+    0 0 20px #1e88e5; /* Efek biru dan hitam */
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
+
+.highlight {
+  background-color: #1e88e5;
+  color: white;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
 
 /* === GAME LOGO BUTTON === */
 .logo-button {
@@ -200,14 +213,30 @@ h1 {
   background-color: #000;
   margin: 0 auto;
   perspective: 1000px;
+  text-decoration: none; /* Menghilangkan garis bawah pada teks */
+  animation: fallFromTop 1s ease-out;
+}
+
+/* Animasi jatuh dari atas */
+@keyframes fallFromTop {
+  0% {
+    transform: translateY(-100px); /* Memulai dari atas */
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0); /* Akhir di posisi semula */
+    opacity: 1;
+  }
 }
 
 .logo-button img {
   width: 100%;
   height: 80%;
   object-fit: cover;
+  border-radius: 10px;
 }
 
+/* Styling for the game name below the logo */
 .logo-button .game-name {
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 1.5px;
@@ -218,13 +247,22 @@ h1 {
   font-weight: bold;
 }
 
+/* Hover effect: Slight scale increase */
 .logo-button:hover {
   transform: scale(1.1);
+  box-shadow: 0 10px 15px rgba(0, 188, 212, 0.4);
 }
 
+/* Active effect: 3D transformation and shadow */
 .logo-button:active {
   transform: rotateY(20deg) rotateX(15deg);
-  box-shadow: 0 8px 20px rgba(0, 188, 212, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 188, 212, 0.6);
+}
+
+/* Smooth transition for hover and active effects */
+.logo-button img,
+.logo-button .game-name {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* === HIDE GAMES === */
@@ -382,4 +420,18 @@ footer {
 @keyframes moveParticle {
   0% { transform: translate(0, 0); }
   100% { transform: translate(400px, 300px); }
+}
+/* Initially hide the game content */
+.hidden-content {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none; /* Prevents interaction while hidden */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* When the content is visible */
+#game-content.visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto; /* Enable interaction when visible */
 }

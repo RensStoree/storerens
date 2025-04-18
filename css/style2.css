@@ -1,11 +1,9 @@
 /* Anime Style Layout */
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to bottom right, #000000, #003366); /* Black + Blue */
+  background: linear-gradient(to bottom right, #000000, #003366);
   margin: 0;
   padding: 0;
-  color: #fff; /* White text for contrast */
-  background-image: url('../images/bg-anime.jpg');
   background-size: cover;
   background-position: center;
   animation: fadeIn 1s ease-in-out;
@@ -15,9 +13,9 @@ body {
   max-width: 800px;
   margin: 50px auto;
   padding: 25px;
-  background-color: rgba(0, 0, 0, 0.8); /* Transparent black background */
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 15px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6); /* Black shadow */
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(5px);
 }
 
@@ -34,12 +32,19 @@ body {
 
 .header h2 {
   font-size: 28px;
-  color: #1e88e5; /* Bright blue */
-  text-shadow: 2px 2px 4px #000000; /* Black text shadow */
+  font-family: 'Orbitron', sans-serif; /* atau ganti bebas */
+  color: #ffffff; /* Putih dominan */
+  text-shadow:
+    0 0 5px #1e88e5,
+    0 0 10px #1e88e5,
+    0 0 15px #000000,
+    0 0 20px #1e88e5; /* Efek biru dan hitam */
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .top-banner marquee {
-  background-color: #1976d2; /* Dark blue */
+  background-color: #1976d2;
   padding: 8px;
   border-radius: 8px;
   color: white;
@@ -48,12 +53,14 @@ body {
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .form-group label {
   font-weight: bold;
-  color: #1e88e5; /* Bright blue */
+  color: #fff;
+  margin-bottom: 10px;
+  display: block;
 }
 
 .input-wrapper {
@@ -61,9 +68,9 @@ body {
 }
 
 input[type="text"] {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid #1e88e5; /* Bright blue */
+  width: 45%;
+  padding: 10px;
+  border: 2px solid #1e88e5;
   border-radius: 8px;
   font-size: 16px;
   outline: none;
@@ -71,7 +78,7 @@ input[type="text"] {
 }
 
 input[type="text"]:focus {
-  border-color: #64b5f6; /* Light blue */
+  border-color: #64b5f6;
 }
 
 .error-icon {
@@ -85,13 +92,13 @@ input[type="text"]:focus {
 /* Nominal Buttons */
 .nominal-options {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); /* Flexible columns */
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   gap: 10px;
 }
 
 .nominal-button {
-  background-color: #003366; /* Dark blue */
-  border: 2px solid #1e88e5; /* Bright blue */
+  background-color: #003366;
+  border: 2px solid #1e88e5;
   padding: 10px;
   text-align: center;
   border-radius: 10px;
@@ -103,12 +110,12 @@ input[type="text"]:focus {
 }
 
 .nominal-button:hover {
-  background-color: #1e88e5; /* Bright blue */
+  background-color: #1e88e5;
   transform: scale(1.05);
 }
 
 .nominal-button.selected {
-  background-color: #1976d2; /* Dark blue */
+  background-color: #1976d2;
   color: white;
   border-color: #1565c0;
 }
@@ -116,54 +123,29 @@ input[type="text"]:focus {
 /* Payment Method Style */
 .payment-methods {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two columns layout */
-  gap: 15px;
+grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .payment-option {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.payment-option img {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.payment-option img:hover {
-  transform: scale(1.1);
-}
-
-.payment-option label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background-color: #001f33; /* Dark blue */
-  padding: 10px;
-  border: 2px solid #1e88e5; /* Bright blue */
+  background-color: #002b5c;
+  border: 2px solid #1e88e5;
   border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   color: white;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-.payment-option label:hover {
-  background-color: #1976d2; /* Dark blue */
-  transform: scale(1.05);
-}
-
-/* Animasi getar */
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  50% { transform: translateX(4px); }
-  75% { transform: translateX(-4px); }
-  100% { transform: translateX(0); }
+.payment-option:hover {
+  background-color: #1e88e5;
+  transform: scale(1.02);
 }
 
 .payment-option input[type="radio"] {
@@ -171,33 +153,45 @@ input[type="text"]:focus {
 }
 
 .payment-option input[type="radio"]:checked + label {
-  background-color: #1976d2; /* Dark blue */
+  background-color: #1976d2;
   color: white;
   font-weight: bold;
-  animation: shake 0.5s ease-out; /* Shake animation */
-}
-
-/* Payment Method Selected */
-.payment-option input[type="radio"]:checked + label img {
   animation: shake 0.5s ease-out;
 }
 
-/* Button */
+.payment-option label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.payment-option img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
 button {
   display: block;
-  width: 100%;
+  width: 20%;
   padding: 14px;
-  background-color: #1e88e5; /* Bright blue */
+  background-color: #1e88e5;
   border: none;
   color: white;
   font-size: 16px;
-  border-radius: 10px;
+  border-radius: 50px;
   cursor: pointer;
   transition: 0.3s;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
 }
 
 button:hover {
-  background-color: #1565c0; /* Dark blue */
+  background-color: #1565c0;
+  transform: scale(1.05);
 }
 
 /* Valid / Invalid ID */
@@ -221,22 +215,26 @@ button:hover {
   }
 }
 
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .container {
-    padding: 15px;
+    padding: 20px;
   }
 
   .nominal-options {
-    grid-template-columns: 1fr 1fr; /* Two buttons per row on smaller screens */
+    grid-template-columns: 1fr 1fr;
   }
 
   .payment-methods {
-    grid-template-columns: 1fr; /* Single column for payment options on mobile */
+    grid-template-columns: 1fr;
   }
 
-  button {
-    padding: 12px;
-    font-size: 14px;
-  }
 }
