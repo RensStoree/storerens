@@ -1,6 +1,6 @@
-// =======================
+// =========================
 // == PRELOADER HANDLER ==
-// =======================
+// =========================
 window.addEventListener('load', () => {
   const preloader = document.getElementById('preloader');
   if (preloader) preloader.style.display = 'none';
@@ -11,29 +11,27 @@ window.addEventListener('load', () => {
   if (typeof loadModel === 'function') loadModel();
 });
 
-// =======================
+// ===========================
 // == MUSIC TOGGLE LOGIC ==
-// =======================
-const musicButton = document.getElementById('toggleMusic');
-const bgMusic = document.getElementById('bg-music');
+// ===========================
+window.addEventListener('DOMContentLoaded', () => {
+  const bgMusic = document.getElementById('bg-music');
+  if (bgMusic) {
+    const playMusic = () => {
+      bgMusic.play().then(() => {
+        console.log("Musik diputar otomatis");
+      }).catch((e) => {
+        console.warn("Autoplay diblokir oleh browser:", e);
+      });
+    };
 
-if (musicButton && bgMusic) {
-  musicButton.addEventListener('click', () => {
-    if (bgMusic.paused) {
-      bgMusic.play();
-      musicButton.innerHTML = '<i class="fas fa-pause"></i>';
-      showNotification('Musik diputar');
-    } else {
-      bgMusic.pause();
-      musicButton.innerHTML = '<i class="fas fa-play"></i>';
-      showNotification('Musik dijeda');
-    }
-  });
-}
+    document.body.addEventListener('click', playMusic, { once: true });
+  }
+});
 
-// ======================
-// == NOTIFICATION LOGIC ==
-// ======================
+// ===========================
+// == NOTIFICATION FUNCTION ==
+// ===========================
 function showNotification(message) {
   const notification = document.getElementById('notification-container');
   if (!notification) return;
@@ -50,15 +48,21 @@ function showNotification(message) {
   }, 2000);
 }
 
-// =====================
-// == SEARCH FUNCTION ==
-// =====================
+// =======================
+// == SEARCH FUNCTIONALITY ==
+// =======================
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const searchIcon = document.getElementById('searchIcon');
 const gameButtons = document.querySelectorAll('.logo-button');
 const showGamesBtn = document.getElementById('showGamesBtn');
 const logoGroup = document.querySelector('.logo-group');
+
+function highlightKeyword(text, keyword) {
+  if (!keyword) return text;
+  const regex = new RegExp(`(${keyword})`, 'gi');
+  return text.replace(regex, '<span class="highlight">$1</span>');
+}
 
 function filterAndSortGames() {
   const keyword = searchInput.value.toLowerCase();
@@ -67,24 +71,40 @@ function filterAndSortGames() {
     return gameName.includes(keyword);
   });
 
-  // Sembunyikan semua tombol
+  // Reset all game buttons
   gameButtons.forEach(btn => {
     btn.style.display = 'none';
     btn.classList.add('hidden');
+
+    // Menyimpan gambar dan memperbarui nama game
+    const gameImg = btn.querySelector('img'); // Mendapatkan elemen gambar
+    const originalText = btn.getAttribute("title");
+    
+    // Reset innerHTML untuk mengembalikan gambar dan nama game
+    btn.innerHTML = '';
+    btn.appendChild(gameImg); // Menambahkan gambar kembali ke tombol
+    btn.innerHTML += `<span>${originalText}</span>`; // Menambahkan nama game
   });
 
-  // Tampilkan dan urutkan tombol yang cocok
+  // Sort the filtered buttons alphabetically
   filteredButtons.sort((a, b) =>
     a.getAttribute("title").localeCompare(b.getAttribute("title"))
   );
 
+  // Show filtered and sorted buttons
   filteredButtons.forEach(btn => {
     btn.style.display = 'inline-block';
     btn.classList.remove('hidden');
-    logoGroup.appendChild(btn); // Susun ulang dalam DOM
+    const gameImg = btn.querySelector('img'); // Mendapatkan gambar
+    const originalText = btn.getAttribute("title");
+    const highlighted = highlightKeyword(originalText, keyword);
+    btn.innerHTML = '';
+    btn.appendChild(gameImg); // Menambahkan gambar kembali ke tombol
+    btn.innerHTML += `<span>${highlighted}</span>`; // Menambahkan teks yang disorot
+    logoGroup.appendChild(btn);
   });
 
-  // Feedback UI
+  // Control the visibility of the search icon and the 'show more' button
   if (searchIcon) searchIcon.style.display = (filteredButtons.length > 0 && keyword) ? 'inline-block' : 'none';
   if (showGamesBtn) showGamesBtn.style.display = (!keyword || filteredButtons.length > 0) ? 'none' : 'inline-block';
 }
@@ -94,9 +114,9 @@ if (searchInput && searchButton) {
   searchButton.addEventListener('click', filterAndSortGames);
 }
 
-// ===================
-// == THEME TOGGLE ==
-// ===================
+// =====================
+// == THEME TOGGLER ==
+// =====================
 const modeToggleButton = document.getElementById('modeToggle');
 const modeIcon = document.getElementById('modeIcon');
 
@@ -121,22 +141,40 @@ if (modeToggleButton) {
   modeToggleButton.addEventListener('click', toggleMode);
 }
 
+// ========================
+// == DISABLE RIGHT CLICK ==
+// ========================
 document.addEventListener('contextmenu', (e) => {
   e.preventDefault();
 });
 
-// =====================
-// == GAME LOADING LOGIC ==
-// =====================
-function goToGame(hash) {
-  const gameMapping = {
-    '#freefire': 'file/ff.html', // Mengarah ke file/ff.html ketika #freefire dipilih
-    '#ml': 'file/ml.html',       // Misal #ml mengarah ke file/ml.html
-    '#pubg': 'file/pubg.html'    // Misal #pubg mengarah ke file/pubg.html
-  };
-  if (gameMapping[hash]) {
-    window.location.href = gameMapping[hash];
-  } else {
-    console.log('Game not found');
-  }
+// ============================
+// == GAME LOADING FUNCTION ==
+// ============================;
+
+function loadGame(url) {
+  fetch(url)
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("main-content").style.display = "none";
+
+      const gameContent = document.getElementById("game-content");
+      gameContent.innerHTML = data;
+      gameContent.style.display = "block";
+      window.scrollTo(0, 0);
+
+      const scripts = gameContent.querySelectorAll("script");
+      scripts.forEach(oldScript => {
+        const newScript = document.createElement("script");
+
+        if (oldScript.src) {
+          newScript.src = oldScript.src;
+          newScript.async = false;
+        } else {
+          newScript.textContent = oldScript.textContent;
+        }
+
+        oldScript.replaceWith(newScript);
+      });
+    });
 }
