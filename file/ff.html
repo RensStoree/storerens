@@ -4,23 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Top Up Free Fire - Rens Store</title>
-  <link rel="stylesheet" href="../css/style2.css">
+  <link rel="stylesheet" href="css/style2.css">
 </head>
 <body>
 
   <div class="container">
     <div class="header">
-      <img src="../images/freefire.jpg" alt="Logo Free Fire">
-      <h2>Top Up Free Fire</h2>
+      <img src="images/freefire.jpg" alt="Logo Free Fire">
+      <h2>Free Fire</h2>
     </div>
-
-<div class="form-group">
-  <label for="gameId">ID Pengguna:</label>
-  <div class="input-wrapper">
-    <input type="text" id="gameId" placeholder="Masukkan ID Pengguna">
+     <div class="form-group">
+     <label for="gameId">ID Pengguna:</label>
+     <div class="input-wrapper">
+      <input type="text" id="gameId" placeholder="Masukkan ID Pengguna" oninput="validateGameId()">
     <span id="gameIdError" class="error-icon">&#9888;</span>
   </div>
-  <p id="gameIdErrorMessage" style="color: red; display: none;">ID Pengguna harus terdiri dari 8 digit angka.</p>
+  <p id="gameIdErrorMessage" class="error-message">ID Pengguna harus terdiri dari 8 digit angka.</p>
 </div>
 
     <div class="top-banner">
@@ -36,9 +35,8 @@
         <div class="nominal-button">Member Bulanan<br><small>Rp 88.592</small></div>
       </div>
     </div>
-
     <div class="form-group">
-      <label>Top Up Instant:</label>
+      <label>Diamond:</label>
       <div class="nominal-options">
         <div class="nominal-button">5 Diamonds<br><small>Rp 921</small></div>
         <div class="nominal-button">20 Diamonds<br><small>Rp 3.676</small></div>
@@ -47,76 +45,62 @@
         <div class="nominal-button">100 Diamonds<br><small>Rp 14.703</small></div>
         <div class="nominal-button">120 Diamonds<br><small>Rp 16.764</small></div>
         <div class="nominal-button">140 Diamonds<br><small>Rp 18.824</small></div>
-        <div class="nominal-button">200 Diamonds<br><small>Rp 29.406</small></div>
         <div class="nominal-button">210 Diamonds<br><small>Rp 28.237</small></div>
+        <div class="nominal-button">200 Diamonds<br><small>Rp 29.406</small></div>
         <div class="nominal-button">280 Diamonds<br><small>Rp 37.648</small></div>
         <div class="nominal-button">355 Diamonds<br><small>Rp 47.060</small></div>
         <div class="nominal-button">400 Diamonds<br><small>Rp 54.412</small></div>
         <div class="nominal-button">475 Diamonds<br><small>Rp 63.823</small></div>
         <div class="nominal-button">500 Diamonds<br><small>Rp 66.803</small></div>
         <div class="nominal-button">520 Diamonds<br><small>Rp 69.559</small></div>
-        <div class="nominal-button">720 Diamonds<br><small>Rp 94.120</small></div>
-        <div class="nominal-button">820 Diamonds<br><small>Rp 108.823</small></div>
-        <div class="nominal-button">860 Diamonds<br><small>Rp 133.344</small></div>
-        <div class="nominal-button">1075 Diamonds<br><small>Rp 141.179</small></div>
-        <div class="nominal-button">1440 Diamonds<br><small>Rp 188.239</small></div>
-        <div class="nominal-button">2100 Diamonds<br><small>Rp 275.704</small></div>
-        <div class="nominal-button">2160 Diamonds<br><small>Rp 282.359</small></div>
-        <div class="nominal-button">2180 Diamonds<br><small>Rp 282.359</small></div>
-        <div class="nominal-button">2720 Diamonds<br><small>Rp 357.655</small></div>
-        <div class="nominal-button">3640 Diamonds<br><small>Rp 470.598</small></div>
-        <div class="nominal-button">3800 Diamonds<br><small>Rp 493.098</small></div>
-        <div class="nominal-button">4000 Diamonds<br><small>Rp 518.576</small></div>
-        <div class="nominal-button">6900 Diamonds<br><small>Rp 895.054</small></div>
-        <div class="nominal-button">7290 Diamonds<br><small>Rp 951.395</small></div>
-        <div class="nominal-button">9800 Diamonds<br><small>Rp 1.268.553</small></div>
-        <div class="nominal-button">73100 Diamonds<br><small>Rp 9.208.948</small></div>
       </div>
     </div>
-
-<!-- Toggle Metode Pembayaran -->
-<div class="form-group payment-methods">
-  <label>Pilih Metode Pembayaran:</label>
+      </div>
+    </div>
+  <div class="payment-section">
+     <label>Metode Pembayaran:</label>
+   <div class="payment-option">
+    <input type="radio" id="qris" name="paymentMethod" value="qris">
+    <label for="qris">
+      <img src="images/dana.jpg" alt="Qris"> Qris
+    </label>
+  </div>
   <div class="payment-option">
     <input type="radio" id="dana" name="paymentMethod" value="dana">
     <label for="dana">
-      <img src="../images/dana.jpg" alt="DANA">
-      DANA
+      <img src="images/dana.jpg" alt="DANA"> DANA
     </label>
   </div>
   <div class="payment-option">
     <input type="radio" id="ovo" name="paymentMethod" value="ovo">
     <label for="ovo">
-      <img src="../images/ovo-icon.png" alt="OVO">
-      OVO
+      <img src="images/ovo.jpg" alt="OVO"> OVO
     </label>
   </div>
   <div class="payment-option">
     <input type="radio" id="gopay" name="paymentMethod" value="gopay">
     <label for="gopay">
-      <img src="../images/gopay-icon.png" alt="GoPay">
-      GoPay
+      <img src="images/gopay.jpg" alt="GoPay"> Gopay
     </label>
   </div>
   <div class="payment-option">
     <input type="radio" id="shopeepay" name="paymentMethod" value="shopeepay">
     <label for="shopeepay">
-      <img src="../images/shopeepay-icon.png" alt="ShopeePay">
-      ShopeePay
+      <img src="images/shopeepay.jpg" alt="ShopeePay"> ShopeePay
     </label>
   </div>
   <div class="payment-option">
     <input type="radio" id="bank_transfer" name="paymentMethod" value="bank_transfer">
     <label for="bank_transfer">
-      <img src="../images/bank-icon.png" alt="Transfer Bank">
-      Transfer Bank
+      <img src="images/bank-icon.png" alt="Transfer Bank"> Transfer Bank
     </label>
   </div>
-  
 </div>
-<button onclick="prosesTopUp()">Top Up Sekarang</button>
-</div>
-</div>
-  <script src="../js/script1.js"></script>
+
+
+    <button onclick="prosesTopUp()">Top Up Sekarang</button>
+  </div>
+
+  <script src="js/script1.js"></script>
 </body>
 </html>
