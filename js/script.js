@@ -129,47 +129,23 @@ document.addEventListener('contextmenu', (e) => {
 // == GAME LOADING LOGIC ==
 // =====================
 function loadGame(page, slug) {
-  fetch(page)
-    .then(res => res.text())
+  fetch(page)  // Mengambil file HTML
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return res.text();  // Mengambil isi halaman dalam bentuk text
+    })
     .then(html => {
+      // Memasukkan HTML yang dimuat ke dalam elemen dengan ID 'game-content'
       document.getElementById('game-content').innerHTML = html;
-      history.pushState({}, '', slug); // Bersihkan URL
+      
+      // Memperbarui URL tanpa memuat ulang halaman
+      history.pushState({}, '', slug);
     })
     .catch(error => {
       console.error("Error loading the game page:", error);
+      // Menampilkan pesan error ke pengguna
+      document.getElementById('game-content').innerHTML = "<p>Terjadi kesalahan saat memuat halaman game.</p>";
     });
 }
-
-window.addEventListener('DOMContentLoaded', () => {
-  const path = window.location.pathname.replace('/', '');
-  if (path) {
-    // Mapping game ke file
-    const gameMap = {
-      freefire: 'ff.html',
-      codm: 'harga.html',
-      supersus: 'harga.html',
-      mlbb: 'harga.html',
-      pubgm: 'harga.html',
-      genshinimpact: 'harga.html',
-      valorant: 'harga.html',
-      fortnite: 'harga.html',
-      apexlegends: 'harga.html',
-      leagueoflegends: 'harga.html',
-      overwatch2: 'harga.html',
-      rainbowsixsiege: 'harga.html',
-      callofduty: 'harga.html',
-      pubg: 'harga.html',
-      mobilelegends: 'harga.html',
-      fifa22: 'harga.html',
-      minecraft: 'harga.html',
-      rocketleague: 'harga.html',
-      valhallavikings: 'harga.html',
-      worldwar3: 'harga.html',
-      destiny2: 'harga.html',
-      counterstrike: 'harga.html',
-    };
-    if (gameMap[path]) {
-      loadGame(gameMap[path], path);
-    }
-  }
-});
