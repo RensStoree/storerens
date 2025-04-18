@@ -62,7 +62,7 @@
   <!-- Game Logos Section -->
   <div class="logo-group">
     <!-- Free Fire -->
-    <a href="#" onclick="loadGame('ff.html', 'freefire')" class="logo-button" title="Free Fire">
+    <a href="#" onclick="loadGame('file/ff.html', 'freefire')" class="logo-button" title="Free Fire">
       <img src="images/freefire.jpg" alt="Free Fire" />
       <span>Free Fire</span>
     </a>
@@ -121,8 +121,6 @@
     </a>
   </div>
 
-  <!-- Additional Game Logos (Mobile Legends, COD, FIFA, etc.) -->
-
   <!-- Dark/Light Mode Toggle Button -->
   <button id="modeToggle" class="mode-toggle-button">
     <i id="modeIcon" class="fas fa-sun"></i>
@@ -169,6 +167,9 @@
 
   <!-- Notification Container -->
   <div id="notification-container" style="display: none;"></div>
+
+  <!-- Tempat konten game akan dimuat -->
+  <div id="game-content"></div>
 
   <!-- Scripts -->
   <script src="js/script.js"></script>
