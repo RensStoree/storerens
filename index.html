@@ -1,265 +1,255 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Rens Store - Top Up Game</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/dark-mode.css" media="(prefers-color-scheme: dark)">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Game Support - Rens Store</title>
+  <!-- Font Awesome (Pilih satu versi) -->
+  <!-- Google Fonts - Bangers -->
+<link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+<!-- Google Fonts - Press Start 2P -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<!-- Google Fonts - Russo One -->
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+<!-- Google Fonts - Orbitron -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Gaya CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dark-mode.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
 </head>
+<!-- Preloader -->
+<div id="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</div>
 <body>
-  <div id="preloader">
-    <div class="spinner"></div>
+  <!-- Logo Section -->
+  <div class="logo-container">
+      <img src="images/logo-rensstore.png" alt="Logo Rens Store" class="logo" />
+      <a class="store-name">Rens Store</a>
+    </a>
+  </div>
+  
+  <!-- Tombol Toggle Menu -->
+  <div id="menu-toggle" class="menu-toggle">
+    <i class="fas fa-bars"></i>
+  </div>
+  <!-- Sidebar Kiri -->
+  <div id="sidebar-menu" class="sidebar-menu">
+    <div class="sidebar-header">
+      <span id="close-sidebar" class="close-btn">&times;</span>
+      <h2>Menu</h2>
+    </div>
+    <ul class="sidebar-list">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#games">Games</a></li>
+      <li><a href="#profile">Profile</a></li> <!-- Tambahkan item ini -->
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="spinner"></div>
+    </div>
   </div>
 
-  <button id="toggleMode" class="mode-button" aria-label="Toggle Dark/Light Mode">
-    <i class="fas fa-moon"></i>
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Cari Game..." />
+    <i id="searchIcon" class="fas fa-check" style="display: none; margin-left: 5px; color: green;"></i>
+    <button id="searchButton"><i class="fas fa-search"></i></button>
+  </div>
+
+<!-- Game Logos Section -->
+   <div class="logo-group">
+   <a href="#" class="logo-button" title="Free Fire" title="fetchVariant('FREEFIRE001')">
+   <img src="images/freefire.jpg" alt="Free Fire" />
+  <span>Free Fire</span>
+   </a>
+
+
+  <a href="harga.html?game=codm#codm" class="logo-button" title="Call of Duty Mobile" >
+    <img src="images/codm.jpg" alt="Call of Duty Mobile" />
+    <span>Call of Duty Mobile</span>
+  </a>
+
+  <a href="harga.html?game=supersus#supersus" class="logo-button" title="Super Sus">
+    <img src="images/supersus.jpg" alt="Super Sus" />
+    <span>Super Sus</span>
+  </a>
+
+   <a href="harga.html?game=mlbb#mlbb" class="logo-button" title="Mobile Legends: Bang Bang" >
+    <img src="images/mlbb-logo.png" alt="Mobile Legends: Bang Bang" />
+    <span>Mobile Legends: Bang Bang</span>
+  </a> 
+  <a href="harga.html?game=pubgm#pubgm" class="logo-button" title="PUBG Mobile">
+    <img src="images/pubgm-logo.png" alt="PUBG Mobile" />
+    <span>PUBG Mobile</span>
+  </a>
+
+  <a href="harga.html?game=genshinimpact#genshinimpact" class="logo-button" title="Genshin Impact" >
+    <img src="images/genshinimpact-logo.png" alt="Genshin Impact" />
+    <span>Genshin Impact</span>
+  </a>
+</div>
+<!-- Game Logos Section -->
+<div class="logo-group">
+  <a href="harga.html?game=valorant#valorant" class="logo-button" title="Valorant" >
+    <img src="images/valorant-logo.png" alt="Valorant" />
+    <span>Valorant</span>
+  </a>
+
+  <a href="harga.html?game=fortnite#fortnite" class="logo-button" title="Fortnite" >
+    <img src="images/fortnite-logo.png" alt="Fortnite" />
+    <span>Fortnite</span>
+  </a>
+
+  <a href="harga.html?game=apexlegends#apexlegends" class="logo-button" title="Apex Legends" >
+    <img src="images/apexlegends-logo.png" alt="Apex Legends" />
+    <span>Apex Legends</span>
+  </a>
+
+  <a href="harga.html?game=leagueoflegends#leagueoflegends" class="logo-button" title="League of Legends" >
+    <img src="images/leagueoflegends-logo.png" alt="League of Legends" />
+    <span>League of Legends</span>
+  </a>
+
+  <a href="harga.html?game=overwatch2#overwatch2" class="logo-button" title="Overwatch 2" >
+    <img src="images/overwatch2-logo.png" alt="Overwatch 2" />
+    <span>Overwatch 2</span>
+  </a>
+
+  <a href="harga.html?game=rainbowsixsiege#rainbowsixsiege" class="logo-button" title="Rainbow Six Siege" >
+    <img src="images/rainbowsixsiege-logo.png" alt="Rainbow Six Siege" />
+    <span>Rainbow Six Siege</span>
+  </a>
+
+  <a href="harga.html?game=callofduty#callofduty" class="logo-button" title="Call of Duty" >
+    <img src="images/cod-logo.png" alt="Call of Duty" />
+    <span>Call of Duty</span>
+  </a>
+
+  <a href="harga.html?game=pubg#pubg" class="logo-button" title="PUBG" >
+    <img src="images/pubg-logo.png" alt="PUBG" />
+    <span>PUBG</span>
+  </a>
+
+  <a href="harga.html?game=genshinimpact#genshinimpact" class="logo-button" title="Genshin Impact" >
+    <img src="images/genshinimpact-logo.png" alt="Genshin Impact" />
+    <span>Genshin Impact</span>
+  </a>
+
+  <a href="harga.html?game=freefire#freefire" class="logo-button" title="Free Fire" >
+    <img src="images/freefire-logo.png" alt="Free Fire" />
+    <span>Free Fire</span>
+  </a>
+
+  <a href="harga.html?game=mobilelegends#mobilelegends" class="logo-button" title="Mobile Legends" >
+    <img src="images/ml-logo.png" alt="Mobile Legends" />
+    <span>Mobile Legends</span>
+  </a>
+
+  <a href="harga.html?game=valorant#valorant" class="logo-button" title="Valorant" >
+    <img src="images/valorant-logo.png" alt="Valorant" />
+    <span>Valorant</span>
+  </a>
+
+  <a href="harga.html?game=fifa22#fifa22" class="logo-button" title="FIFA 22" >
+    <img src="images/fifa22-logo.png" alt="FIFA 22" />
+    <span>FIFA 22</span>
+  </a>
+
+  <a href="harga.html?game=minecraft#minecraft" class="logo-button" title="Minecraft" >
+    <img src="images/minecraft-logo.png" alt="Minecraft" />
+    <span>Minecraft</span>
+  </a>
+
+  <a href="harga.html?game=rocketleague#rocketleague" class="logo-button" title="Rocket League" >
+    <img src="images/rocketleague-logo.png" alt="Rocket League" />
+    <span>Rocket League</span>
+  </a>
+
+  <a href="harga.html?game=valhallavikings#valhallavikings" class="logo-button" title="Valhalla Vikings" >
+    <img src="images/valhallavikings-logo.png" alt="Valhalla Vikings" />
+    <span>Valhalla Vikings</span>
+  </a>
+
+  <a href="harga.html?game=worldwar3#worldwar3" class="logo-button" title="World War 3" >
+    <img src="images/worldwar3-logo.png" alt="World War 3" />
+    <span>World War 3</span>
+  </a>
+
+  <a href="harga.html?game=fortnite#fortnite" class="logo-button" title="Fortnite" >
+    <img src="images/fortnite-logo.png" alt="Fortnite" />
+    <span>Fortnite</span>
+  </a>
+
+  <a href="harga.html?game=destiny2#destiny2" class="logo-button" title="Destiny 2" >
+    <img src="images/destiny2-logo.png" alt="Destiny 2" />
+    <span>Destiny 2</span>
+  </a>
+
+  <a href="harga.html?game=counterstrike#counterstrike" class="logo-button" title="Counter-Strike" >
+    <img src="images/counterstrike-logo.png" alt="Counter-Strike" />
+    <span>Counter-Strike</span>
+  </a>
+</div> 
+
+
+  <!-- Dark/Light Mode Toggle Button -->
+  <button id="modeToggle" class="mode-toggle-button">
+    <i id="modeIcon" class="fas fa-sun"></i>
   </button>
 
-  <header class="main-nav">
-    <div class="logo-container">
-      <a href="/" class="logo-link">
-        <img src="images/logo-rensstore.png" alt="Logo Rens Store" class="logo">
-        <span class="store-name">Rens Store</span>
-      </a>
-    </div>
-    <div class="search-container">
-      <input type="search" id="searchInput" placeholder="Cari Game..." aria-label="Cari Game">
-      <button id="searchButton" aria-label="Cari"><i class="fas fa-search"></i></button>
-    </div>
-  </header>
+  <!-- How to Top Up Section -->
+  <section class="how-to-topup">
+    <h2>Cara Top Up</h2>
+    <ol>
+      <li>Pilih game yang ingin di-top up.</li>
+      <li>Masukkan ID Pengguna dan Server (jika diperlukan).</li>
+      <li>Pilih jumlah top up yang diinginkan.</li>
+      <li>Selesaikan pembayaran.</li>
+      <li>Koin atau diamond akan segera ditambahkan ke akun Anda.</li>
+    </ol>
+  </section>
 
-  <main>
-    <section class="hero">
-      <h1>Top Up Game Favoritmu!</h1>
-    </section>
+  <!-- Contact Section -->
+  <div class="section" id="kontak">
+    <a href="https://wa.me/6283162874553" class="wa-button" title="Chat WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://instagram.com/storerenss" class="ig-link" title="Instagram @rensstore.id"><i class="fab fa-instagram"></i></a>
+  </div>
 
-    <section class="game-list">
-      <div class="game-grid" id="gameListContainer">
-        <div class="game-card" data-category="mobile action" data-game-name="Free Fire">
-          <img src="images/freefire.jpg" alt="Free Fire">
-          <h3>Free Fire</h3>
-          <div class="game-actions">
-            <a href="file/ff.html?game=freefire#freefire" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Free Fire" aria-label="Tambahkan Free Fire ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="mobile action" data-game-name="Call of Duty">
-          <img src="images/codm.jpg" alt="Call of Duty">
-          <h3>Call of Duty</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=codm#codm" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Call of Duty" aria-label="Tambahkan Call of Duty ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="mobile strategy" data-game-name="Super Sus">
-          <img src="images/supersus.jpg" alt="Super Sus">
-          <h3>Super Sus</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=supersus#supersus" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Super Sus" aria-label="Tambahkan Super Sus ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="mobile strategy action" data-game-name="Mobile Legends">
-          <img src="images/mlbb.jpg" alt="Mobile Legends">
-          <h3>Mobile Legends</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=mlbb#mlbb" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Mobile Legends" aria-label="Tambahkan Mobile Legends ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="pc strategy" data-game-name="Dota 2">
-          <img src="images/dota2.jpg" alt="Dota 2">
-          <h3>Dota 2</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=dota2#dota2" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Dota 2" aria-label="Tambahkan Dota 2 ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="pc action" data-game-name="Valorant">
-          <img src="images/valorant.jpg" alt="Valorant">
-          <h3>Valorant</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=valorant#valorant" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Valorant" aria-label="Tambahkan Valorant ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="mobile rpg" data-game-name="Genshin Impact">
-          <img src="images/genshinimpact.jpg" alt="Genshin Impact">
-          <h3>Genshin Impact</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=genshinimpact#genshinimpact" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Genshin Impact" aria-label="Tambahkan Genshin Impact ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="mobile strategy rpg" data-game-name="Honkai: Star Rail">
-          <img src="images/honkaistarrail.jpg" alt="Honkai: Star Rail">
-          <h3>Honkai: Star Rail</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=honkaistarrail#honkaistarrail" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Honkai: Star Rail" aria-label="Tambahkan Honkai: Star Rail ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="mobile action rpg" data-game-name="Punishing: Gray Raven">
-          <img src="images/punishinggrayraven.jpg" alt="Punishing: Gray Raven">
-          <h3>Punishing: Gray Raven</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=punishinggrayraven#punishinggrayraven" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Punishing: Gray Raven" aria-label="Tambahkan Punishing: Gray Raven ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="pc action rpg" data-game-name="Lost Ark">
-          <img src="images/lostark.jpg" alt="Lost Ark">
-          <h3>Lost Ark</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=lostark#lostark" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Lost Ark" aria-label="Tambahkan Lost Ark ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="pc simulation" data-game-name="Minecraft">
-          <img src="images/minecraft.jpg" alt="Minecraft">
-          <h3>Minecraft</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=minecraft#minecraft" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Minecraft" aria-label="Tambahkan Minecraft ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="pc strategy simulation" data-game-name="Stardew Valley">
-          <img src="images/stardewvalley.jpg" alt="Stardew Valley">
-          <h3>Stardew Valley</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=stardewvalley#stardewvalley" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Stardew Valley" aria-label="Tambahkan Stardew Valley ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="mobile adventure" data-game-name="Terraria">
-          <img src="images/terraria.jpg" alt="Terraria">
-          <h3>Terraria</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=terraria#terraria" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Terraria" aria-label="Tambahkan Terraria ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="mobile puzzle" data-game-name="Candy Crush Saga">
-          <img src="images/candycrushsaga.jpg" alt="Candy Crush Saga">
-          <h3>Candy Crush Saga</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=candycrushsaga#candycrushsaga" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Candy Crush Saga" aria-label="Tambahkan Candy Crush Saga ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="mobile racing" data-game-name="Asphalt 9: Legends">
-          <img src="images/asphalt9legends.jpg" alt="Asphalt 9: Legends">
-          <h3>Asphalt 9: Legends</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=asphalt9legends#asphalt9legends" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Asphalt 9: Legends" aria-label="Tambahkan Asphalt 9: Legends ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <div class="game-card" data-category="pc action rpg" data-game-name="Cyberpunk 2077">
-          <img src="images/cyberpunk2077.jpg" alt="Cyberpunk 2077">
-          <h3>Cyberpunk 2077</h3>
-          <div class="game-actions">
-            <a href="harga.html?game=cyberpunk2077#cyberpunk2077" class="cool-button">Top Up</a>
-            <button class="favorite-button" data-game-name="Cyberpunk 2077" aria-label="Tambahkan Cyberpunk 2077 ke Favorit">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-    <div class="see-all-games">
-      <a href="file/game.html" class="cool-button">Lihat Semua Game</a>
-    </div>
-    <section class="favorite-section">
-      <h2>
-        <button id="favoriteGamesButton" class="cool-button">
-          <i class="fas fa-heart"></i> Favorit (<span id="favoriteCount">0</span>)
-        </button>
-      </h2>
-      <div id="favoriteGamesList" style="display: none;">
-        <div id="favoriteGamesContainer">
-          </div>
-      </div>
-    <section class="favorite-section">
-      </section>
-    <section class="how-to-topup">
-      <h2>Cara Top Up</h2>
-      <ol>
-        <li>Pilih game yang ingin di-top up.</li>
-        <li>Masukkan ID Pengguna dan Server.</li>
-        <li>Pilih jumlah top up.</li>
-        <li>Lakukan pembayaran.</li>
-        <li>Item akan langsung masuk ke akun kamu.</li>
-      </ol>
-    </section>
-
-    <section id="kontak">
-      <h2>Kontak Kami</h2>
-      <p>
-        <a href="https://wa.me/6283162874553" class="wa-button" title="Chat WhatsApp" aria-label="Chat kami di WhatsApp">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="https://instagram.com/storerenss" class="ig-link" title="Kunjungi Instagram kami" aria-label="Kunjungi Instagram kami">
-          <i class="fab fa-instagram"></i> Instagram
-        </a>
-      </p>
-    </section>
-  </main>
-
+  <!-- Footer -->
   <footer>
     &copy; 2025 Rens Store. All rights reserved.
   </footer>
 
-  <div class="particles" aria-hidden="true">
-    <div class="particle" style="top:10%; left:20%"></div>
-    <div class="particle" style="top:50%; left:40%"></div>
-    <div class="particle" style="top:80%; left:60%"></div>
-    <div class="particle" style="top:30%; left:80%"></div>
-    <div class="particle" style="top:70%; left:10%"></div>
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle" style="top: 10%; left: 20%; animation-delay: 0.5s;"></div>
+    <div class="particle" style="top: 50%; left: 40%; animation-delay: 1s;"></div>
+    <div class="particle" style="top: 80%; left: 60%; animation-delay: 1.5s;"></div>
+    <div class="particle" style="top: 30%; left: 80%; animation-delay: 2s;"></div>
+    <div class="particle" style="top: 70%; left: 10%; animation-delay: 2.5s;"></div>
   </div>
 
-  <button id="toggleMusic" class="music-button" aria-label="Toggle Background Music">
-    <i class="fas fa-play"></i>
-  </button>
+  <!-- Music Toggle -->
+  <button id="toggleMusic" class="music-button"><i class="fas fa-play"></i></button>
   <audio id="bg-music" loop>
-    <source src="anime.mp3" type="audio/mpeg">
-    Browser tidak mendukung audio.
+    <source src="anime.mp3" type="audio/mpeg" />
+    <p>Browser tidak mendukung audio</p>
   </audio>
 
-  <div id="notification-container"></div>
+  <!-- Notification Container -->
+  <div id="notification-container" style="display: none;"></div>
 
+  <!-- Scripts -->
   <script src="js/script.js"></script>
 </body>
 </html>
