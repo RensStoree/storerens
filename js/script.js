@@ -128,27 +128,15 @@ document.addEventListener('contextmenu', (e) => {
 // =====================
 // == GAME LOADING LOGIC ==
 // =====================
-function loadGame(page, slug) {
-  fetch(page)  // Mengambil file HTML
-    .then(res => {
-      if (!res.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return res.text();  // Mengambil isi halaman dalam bentuk text
-    })
-    .then(html => {
-      // Memasukkan HTML yang dimuat ke dalam elemen dengan ID 'game-content'
-      document.getElementById('game-content').innerHTML = html;
-      
-      // Memperbarui URL tanpa memuat ulang halaman
-      history.pushState({}, '', slug);
-    })
-    .catch(error => {
-      console.error("Error loading the game page:", error);
-      // Menampilkan pesan error ke pengguna
-      document.getElementById('game-content').innerHTML = "<p>Terjadi kesalahan saat memuat halaman game.</p>";
-    });
-}
-function goToGame(url) {
-  window.location.href = url;
+function goToGame(hash) {
+  const gameMapping = {
+    '#freefire': 'file/ff.html', // Mengarah ke file/ff.html ketika #freefire dipilih
+    '#ml': 'file/ml.html',       // Misal #ml mengarah ke file/ml.html
+    '#pubg': 'file/pubg.html'    // Misal #pubg mengarah ke file/pubg.html
+  };
+  if (gameMapping[hash]) {
+    window.location.href = gameMapping[hash];
+  } else {
+    console.log('Game not found');
+  }
 }
