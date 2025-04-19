@@ -1,10 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="refresh" content="0; url=https://storerens.com">
-  <title>Redirecting...</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="5; url=https://storerens.com">
+  <title>404 - Page Not Found</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #2c2c2c; /* Abu-abu gelap */
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      overflow: hidden;
+      text-align: center;
+    }
+    .container {
+      animation: fadeIn 0.4s ease-in-out forwards;
+      position: relative;
+      z-index: 2;
+    }
+    h1 {
+      font-size: 10rem;
+      margin: 0;
+    }
+    p {
+      font-size: 1.5rem;
+      margin: 10px 0 20px;
+    }
+    a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: 2px solid #fff;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    a:hover {
+      background-color: #fff;
+      color: #2c2c2c;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
-  <p>If you are not redirected, <a href="https://storerens.com">click here</a>.</p>
+  <div class="container">
+    <h1>Oops!</h1>
+    <p>The page you're looking for doesn't exist.</p>
+    <p>You will be redirected in <span id="countdown">5</span> seconds...</p>
+    <a href="rensstoree.github.io/storerens/">Go to Homepage</a>
+  </div>
+
+  <script>
+    // Script untuk countdown angka dari 5 ke 1
+    let countdownNumber = 5;
+    const countdownElement = document.getElementById('countdown');
+
+    const countdownInterval = setInterval(() => {
+      countdownNumber--; // Kurangi angka
+      countdownElement.textContent = countdownNumber; // Perbarui teks
+
+      // Hentikan interval jika angka mencapai 1
+      if (countdownNumber <= 1) {
+        clearInterval(countdownInterval);
+      }
+    }, 1000); // Jalankan setiap 1 detik
+  </script>
 </body>
 </html>
