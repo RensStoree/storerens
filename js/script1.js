@@ -1,7 +1,9 @@
 // ===============================
 // == VALIDASI INPUT ID GAME ==
 // ===============================
-
+  window.addEventListener('popstate', function () {
+    window.location.href = 'index.html';
+  });
 // Fungsi untuk mengecek apakah string hanya berisi angka
 function isNumeric(str) {
   return /^\d+$/.test(str);
